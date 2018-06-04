@@ -22,7 +22,7 @@ function testProperty(property) {
 `
 
 ###检测某个具体属性值是否支持
-`
+```javascript
 function testValue(id, value, property) { 
     var dummy = document.createElement('p'); 
     dummy.style[property] = value;
@@ -32,5 +32,5 @@ function testValue(id, value, property) {
      root.classList.add('no-' + id);
      return false; 
      }
-`
+```
 
