@@ -61,3 +61,41 @@ function testValue(id, value, property) {
  * CSS [伸缩盒布局](http://w3.org/TR/css-flexbox-1) 
  * CSS 网格布局(http://w3.org/TR/css-grid-1)
  尽管“CSS3”这个名词非常流行,但它实际上并没有在任何规范中定 义过。这一点跟 CSS 2.1 或更早的 CSS 1 不一样。真正的情况是,绝大多
+ 
+ ### 灵活的按钮
+ * 按钮1
+ ```
+ padding: .3em .8em;
+ border: 1px solid #446d88;
+ background: #58a linear-gradient(#77a0bb, #58a); 
+ border-radius: .2em;
+ box-shadow: 0 .05em .25em gray;
+ color: white;
+ text-shadow: 0 -.05em .05em #335166;
+ font-size: 125%;
+ line-height: 1.5;
+ ```
+ 缺点: 要根据按钮的亮面和暗面相对于主色调   #58a 变亮和变暗的程度来分别推 导出其他颜色各自的亮色和暗色版本。
+ 此外,若我们想把按钮放在一个非白 色的背景之上呢?显然使用灰色( gray)作投影只适用于纯白背景的情 况。
+ 
+ *改良的灵活的按钮
+ **半透明的黑色或白色叠加在主色调上,即可产生主色调的亮 色和暗色变体,**
+ // 推 荐 使 用 HSLA 而 不 是 RGBA 来产生半透明的白色,因 为它的字符长度更短,敲起来也 更快。这归功于它的重复度更低
+ ```
+ padding: .3em .8em;
+ border: 1px solid rgba(0,0,0,.1);
+ background: #58a linear-gradient(hsla(0,0%,100%,.2),
+                                  transparent);
+ border-radius: .2em;
+ box-shadow: 0 .05em .25em rgba(0,0,0,.5); 
+ color: white;
+ text-shadow: 0 -.05em .05em rgba(0,0,0,.5);
+ font-size: 125%; 
+ line-height: 1.5;
+ 
+ 
+ button.cancel { background-color: #c00;
+ }
+ button.ok { background-color: #6b0;
+ }
+ ```
