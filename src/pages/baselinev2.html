@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        div {
+            width: 700px;
+            height: 300px;
+            background: #bbbbbb;
+            margin: 50px auto;
+        }
+        span {
+            width: 100px;
+            display: inline-block;
+            background: #f8b9b7;
+            border: 10px solid #FF6600;
+            margin: 30px;  /*这里很重要*/
+
+        }
+        /*
+            inline-block元素的baseline三种情况
+            （1）处于正常流，内容框中有内容 (linebox的基线)
+            （2）有内容且overflow设置为hidden或者auto，只要不是visible (margin-box的下边界)
+            （3）无内容 (baseline为margin-box的下边界)
+        */
+    </style>
+</head>
+<body>
+<div>
+    <span>我是inline-block情况（1）</span>
+    <span style="overflow: hidden;">我是inline-block情况（2）</span>
+    <span></span><!--这是情况（3）--没有内容 -->
+</div>
+</body>
+</html>

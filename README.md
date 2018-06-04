@@ -99,3 +99,21 @@ function testValue(id, value, property) {
  button.ok { background-color: #6b0;
  }
  ```
+ 
+ ### baseline理解 vertical-align默认是基线对齐
+  参考 (https://www.cnblogs.com/xuhaodong/p/basseline.html)
+  
+ ### 代码易维护(改动尽可能少)
+ ```
+ border-width: 10px 10px 10px 0;
+ ```
+ 使用下面的代码 border-width变啦只需改一个地方
+ ``` 
+ border:10px
+ border-left-width:0px
+ ```
+ 
+ ###  currentColor  css史上第一个变量
+ 未来,我们在原生 CSS 中拥有处理颜色的函数后,currentColor 就会 变得更加有用,因为我们可以用这些函数来产生其各种深浅明暗的变体。
+
+ 
