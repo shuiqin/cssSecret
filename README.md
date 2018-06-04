@@ -43,7 +43,7 @@ function testValue(id, value, property) {
 ```
 
 ## CSS3规范
-* CSS [语法](http://w3.org/TR/css-syntax-3)
+ * CSS [语法](http://w3.org/TR/css-syntax-3)
  * CSS [层叠与继承](http://w3.org/TR/css-cascade-3)
  * CSS [颜色](http://w3.org/TR/css3-color)
  * [选择符](http://w3.org/TR/selectors)
