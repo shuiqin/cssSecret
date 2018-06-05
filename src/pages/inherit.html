@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body{
+            background: red;
+            background: conic-gradient(limegreen, green, limegreen);
+            min-height: 100%;
+        }
+        div{
+            background: green;
+            width: 200px;
+        }
+
+
+        @supports not(text-shadow:0 0 .3em yellow){
+            .test h1{
+                color:red;
+                text-shadow:0 0 .3em yellow;
+            }
+        }
+        a{
+            color:inherit;
+        }
+        .test{
+            color: darkred;
+        }
+        button,input,select{
+            font: inherit;
+            color:inherit;
+        }
+
+        .callout{
+            position: relative;
+            width:inherit;
+            height:2em;
+            display:inline-block;
+            background: yellow;
+            margin-top:0.4em;
+            border: 0.5px solid deeppink;
+        }
+
+        .callout:before{
+            content: "";
+            position: absolute;
+            top: -.45em;
+            left: 1em;
+            padding: 0.35em;
+            background: inherit;
+            border: inherit;
+            border-right: 0;
+            border-bottom: 0;
+            transform: rotate(45deg);
+        }
+    </style>
+</head>
+<body>
+<div class="test">
+    hello, test
+    <h1>titi tti t ltitletitle</h1>
+    <a href="http://www.baidu.com">hhhh</a>
+    <button>ok</button>
+    <div >
+        <label>Your username:</label>
+
+        <input placeholder="please input name"/>
+          <span class="callout">
+            <!--input提示框-->
+        </span>
+    </div>
+    <select>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+    </select>
+</div>
+</body>
+</html>

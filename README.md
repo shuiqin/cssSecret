@@ -116,4 +116,28 @@ function testValue(id, value, property) {
  ###  currentColor  css史上第一个变量
  未来,我们在原生 CSS 中拥有处理颜色的函数后,currentColor 就会 变得更加有用,因为我们可以用这些函数来产生其各种深浅明暗的变体。
 
+ ### 提示框上的倒三角
+ ```
+  .callout:before{
+             content: "";
+             position: absolute;
+             top: -.45em;
+             left: 1em;
+             padding: 0.35em;
+             background: inherit;
+             border: inherit;
+             border-right: 0;
+             border-bottom: 0;
+             transform: rotate(45deg);
+         }
+ ```
  
+ ### 视觉上的错觉 p42
+ * 对完美垂直居中的布局看着偏上
+ * 同宽同高的圆比 正方形看着小
+ * 文字边距设一样 上下看着边距比左右更大
+ 
+ ### 媒体查询的断点不应该🈶️具体的设备来决定 应根据设计自身决定
+ 及pc端以任意尺寸的窗口来显示都能很好的显示
+     *使用百分比或视口相关的单位(视口宽度或高度的百分比) (vw vh vmin vmax) 
+     [参考](https://blog.csdn.net/ZNYSYS520/article/details/76053961)
