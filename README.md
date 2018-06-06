@@ -156,7 +156,40 @@ function testValue(id, value, property) {
     css预处理器自己有不为人知的bug
     
  ### CSS 的原生变量(--accent-color11)所具备的动态性 
+ http://www.myth.io/ 偏原生的css预处理器
  
          ul { --accent-color11: yellow; }
          ol { --accent-color11: red; }
          li { background: var(--accent-color11); }
+         
+  ### 半透明边框实现border
+   **默认情况下 背景色会延伸到边框所在的区域下层**
+   以下透明未起作用, 是因为我们没有让body的背景从半透明白色边框初透出来,
+   而是半透明白色边框处透出啦这个容器自己的绿色背景 
+   (background: white; 跟纯白实色的边框看起来效果一样)
+   ```
+   border: 10px dotted hsla(0,0%,100%,.5); 
+   background: green;
+   ```
+   **
+   在 CSS 2.1 中,这就是背景的工作原理。我们只能接受它并且向前看。 谢天谢地,从背景与边框(第三版)(http://w3.org/TR/css3-background)开 始,
+   我们可以通过 background-clip 属性来调整上述默认行为所带来的不 便。这个属性的初始值是 border-box,意味着背景会被元素的 border box
+   (边框的外沿框)裁切掉。如果不希望背景侵入边框所在的范围,我们要做 的就是把它的值设为 padding-box,这样浏览器就会用内边距的外沿来把背 景裁切掉。
+   **
+   ```
+   border: 10px dotted hsla(0,0%,100%,.5); 
+   background: green;
+   background-clip: padding-box;
+   ```
+   
+   ### 多重边框 box-shadow border.html
+   **box-shadow 的好处在于,它支持逗号分隔语法,我们 可以创建任意数量的投影box-shadow 是层层叠加的,第一层投影位于最顶 层,依次类推。
+   因此,你需要按此规律调整扩张半径。比如说,在前面的代 码中,我们想在外圈再加一道 5px 的外框,那就需要指定扩张半径的值为 15px(10px+5px)。
+   如果你愿意,甚至还可以在这些“边框”的底下再加一 层常规的投影:**
+   background: yellowgreen;
+   box-shadow: 0 0 0 10px #655, 0 0 0 15px deeppink;
+   
+   ### 二层边框 outline border.html
+   **两层边框,那就可以先设置一层常规边 框,再加上 outline(描边)属性来产生外层的边框。这种方法的一大优 点在于边框样式十分灵活,不像上面的 box-shadow 方案只能模拟实线边框
+     (假设我们需要产生虚线边框效果,box-shadow 就没辙了)**
+   

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        div{
+            height: 30vh;
+            background-color: #0a66b7;
+            padding:10px;
+            background: url("../img/search.png") no-repeat bottom right #0a66b7;/*兼容老浏览器*/
+            background-position: right 10px bottom 10px; /**相对任意一个角定位*/
+            margin-bottom: 10px;
+        }
+
+        /**padding跟背景图片位置一致*/
+        .backgroundorigin{
+            height: 30vh;
+            background-color: #0a66b7;
+            padding: 10px;
+            background: url("../img/search.png") no-repeat bottom right #0a66b7;/*兼容老浏览器*/
+            /*background-position: right 10px bottom 10px; /**相对任意一个角定位*/
+            background-origin: content-box;
+        }
+        /*calc运算符前面后面加空格*/
+        .funcCalc{
+            background-position: calc(100% - 20px) calc(100% - 10px);
+        }
+    </style>
+</head>
+<body>
+    <div>未使用backgroundorigin</div>
+    <div class="backgroundorigin">使用backgroundorigin 效果一致 但是代码更干净</div>
+    <div class="funcCalc">calc()函数</div>
+</body>
+</html>
