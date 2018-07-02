@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .innerround-container{
+            background: #0a6aa1;
+            padding:0.8em;
+        }
+        .innerround-container > div {
+            border-radius: 8px;
+            padding: 1em;
+            background: #00A000;
+        }
+
+        .innerround-outline{
+            margin-top: 1em;
+            background: tan;
+            border-radius: .8em;
+            padding:1em;
+            box-shadow: 0 0 0 .33em #655;
+            outline: .6em solid #655;
+        }
+    </style>
+</head>
+<body>
+    <div class="innerround-container">
+        <div>
+            一个容器,只在内侧有圆角,而边框或描边的四个角在外 部仍然保持直角的形状
+        </div>
+    </div>
+
+    <div class="innerround-outline">
+        描边不会跟着元素的圆角走, 但是box-shadow会, 把outline跟box-shadow合
+        在一起刚好填补描边和容器圆角之间的空隙
+        <em>为box-shadow属性指定的扩张值并不一定等于描边的宽度,我们只需要指定一个足够填补'空隙'的
+        扩张值就可以
+            到底多大的扩张值可以填补这些空隙?
+            border-radius 是 .8em,那么最小的扩张值就 是0.8(( 2−1)r≈0.33137085em
+
+            我们要做的就是把它稍微向上取个整, 把 .34em 设置为投影的扩张半径。为了避免每次都要计算,你可以直接使用
+            圆角半径的一半,因为 根号2 − 1 < 0.5 。
+
+            这个方法的另一个限制:为了让这个效果得
+            以达成,扩张半径需要比描边的宽度值小,但它同时又要比 ( 根号2 −1)r 大
+        </em>
+    </div>
+</body>
+</html>

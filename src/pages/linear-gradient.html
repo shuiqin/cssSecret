@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        div{
+            width: 100vw;
+            height: 30vh;
+            margin:5px;
+        }
+        .gradule-change{
+            background: linear-gradient(#fb3, #58a);
+
+        }
+
+        .gradule-change1{
+            background: linear-gradient(#fb3 20%, #58a 80%);
+        }
+        .gradule-change2{
+            background: linear-gradient(#fb3 50%, #58a 50%);
+        }
+        .gradule-change3{
+            /*如果我们把第二个色标的位置值设置为 0,那它的位置就 总是会被浏览器调整为前一个色标的位置值*/
+            background: linear-gradient(#fb3 50%, #58a 0);
+            background-size:100% 20px;
+            background-repeat: no-repeat;
+        }
+        /**水平条纹*/
+        .gradule-change4{
+            background: linear-gradient( to bottom, red 33.3%, black 0, black 66.6%, yellow 0);
+            background-size: 100% 10px ; /**水平条纹*/
+            /*background-repeat: no-repeat;*/
+        }
+        /**垂直条纹*/
+        .gradule-change5{
+            background: linear-gradient( to right, red 33.3%, black 0, black 66.6%, yellow 0);
+            background-size: 30px 100%;/**垂直条纹*/
+            /*background-repeat: no-repeat;*/
+        }
+        .oblique-stripe{
+            background: linear-gradient( 45deg, red 33.3%, black 0, black 66.6%, yellow 0);
+        }
+    </style>
+</head>
+<body>
+<div class="gradule-change">
+    基本的垂直线性渐变
+</div>
+<div class="gradule-change1">
+    顶部和底部20%为实色 真正的渐变只出现在容器60%的区域
+</div>
+<div class="gradule-change2">
+    顶部和底部50%为实色 过渡产生在无限小的过渡区域, 产生两条大水平条纹
+</div>
+
+<div class="gradule-change3">
+    gradule-change3 顶部和底部50%为实色 过渡产生在无限小的过渡区域, 产生两条大水平条纹
+    通过background-size调整尺寸 每条纹高度缩小到10px  默认情况下背景是重复平铺的, 整个容器充满水平条纹
+</div>
+<div style="height:20px; background-color: #0a66b7">
+
+</div>
+<div class="gradule-change4">
+    gradule-change4  产生3种颜色的条纹
+</div>
+<div class="gradule-change5">
+    产生3种颜色的水平条纹
+</div>
+
+<div class="oblique-stripe">
+     斜向条纹
+</div>
+</body>
+</html>

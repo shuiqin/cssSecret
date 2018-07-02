@@ -192,4 +192,4 @@ function testValue(id, value, property) {
    ### 二层边框 outline border.html
    **两层边框,那就可以先设置一层常规边 框,再加上 outline(描边)属性来产生外层的边框。这种方法的一大优 点在于边框样式十分灵活,不像上面的 box-shadow 方案只能模拟实线边框
      (假设我们需要产生虚线边框效果,box-shadow 就没辙了)**
-   
+     
