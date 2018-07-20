@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{
+            text-align: center;
+        }
+        .sepia{
+            /*降饱和度的橙黄色染色效果*/
+            filter:sepia(1) ;/* sepia会增加降饱和度的橙黄色染色效果 几乎所有像素的色相值会被收敛到 35~40*/
+        }
+        .sepia-saturate{
+            /*暖金色的染色效果*/
+            filter:sepia(1) saturate(4);/**saturate给每个像素提升饱和度 我们想要的主色调是   hsl(335, 100%, 50%),那就需要把饱和度提升一些*/
+        }
+        .sepia-saturate-huerotate{
+            /*并不希望把图片调为这种橙黄色调,而 是稍深的亮粉色。因此,我们还需要再添加一个 hue-rotate() 滤镜,
+            把每 个像素的色相以指定的度数进行偏移。为了把原有的色相值 40 改变为 335,
+            我们需要增加大约 295 度(335 – 40):
+            */
+            /*是稍深的亮粉色*/
+            /*transition: .5s filter; /**这个过渡不起作用???*/
+            filter:sepia(1) saturate(4) hue-rotate(295deg);
+        }
+        img:hover,
+        img:focus{
+            filter:none;
+        }
+
+        .mix-blend-mode-con{
+            background:hsl(335, 100%, 50%);
+            display:inline-block;/*不然a元素不能乘满整个图片的面积*/
+        }
+        .mix-blend-mode{
+            mix-blend-mode: luminosity;
+        }
+
+        /**
+        1) 图片的尺寸需要在 CSS 代码中写死;
+      2) 在语义上,这个元素并不是一张图片,因此并不会被读屏器之类的
+设备读出来。
+        */
+        .background-blend-mode{
+            background-blend-mode:luminosity;/*混合模式*/
+            width:90vw;
+            height: 30vh;/**必须要加 否则容器尺寸为0*/
+            background-size:cover;
+            background-color:hsl(335, 100%, 50%); /*一层背景*/
+            transition: 1s backgound-color;
+            background-image:url(../../img/diamond.png);/*另一层背景*/
+
+        }
+        .background-blend-mode:hover{
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <a>
+        <img class="sepia" src="../../img/diamond.png">
+    </a>
+
+    <a>
+        <img class="sepia-saturate" src="../../img/diamond.png">
+    </a>
+
+    <a>
+        <img class="sepia-saturate-huerotate" src="../../img/diamond.png">
+    </a>
+
+    <a class="mix-blend-mode-con">
+        <img class="mix-blend-mode" src="../../img/diamond.png" alt="这种 luminosity 混合模式会保留上层元素的 HSL 亮度信 息,并从它的下层吸取色相和饱和度信息">
+    </a>
+    <div class="background-blend-mode " style="" alt="图片的尺寸需要在 CSS 代码中写死; 在语义上,这个元素并不是一张图片,因此并不会被读屏器之类设备读出来。">
+
+    </div>
+
+</body>
+</html>

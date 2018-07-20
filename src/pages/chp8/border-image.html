@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        div{
+            border: 30px solid transparent;
+            margin:10px;
+            box-sizing: border-box;
+            width:90vw;/*内容器框就超出父元素 为啥*/
+        }
+        .border-image{
+            -moz-border-image:url(../../img/border-image.png) 30 30 round;	/* Old Firefox */
+            -webkit-border-image:url(../../img/border-image.png) 30 30 round;	/* Safari and Chrome */
+            -o-border-image:url(../../img/border-image.png) 30 30 round;		/* Opera */
+            border-image:url(../../img/border-image.png) 30 30 round;
+        }
+
+        /**方案二*/
+        .border-image-container{
+            background:url(../../img/border-imagev2.png);
+            background-size:cover;
+            padding: 1rem;
+        }
+        .border-image-container>div{
+            background: white;
+            padding: 1rem;
+        }
+
+        /**方案三 background-clip**/
+        .background-clip{
+            padding:1rem;
+            border: 3rem solid transparent;
+            background: linear-gradient(white, white), url(../../img/border-imagev2.png);
+            background-clip: padding-box, border-box;
+            background-size:cover;
+            background-orgin:border-box;/**默认是 padding-box  即图片的显示尺寸不仅取决于padding-box的尺寸 而且被放置在padding box的原点 然后蔓延到border box区域 所以看起来怪怪的*/
+            /**简写属性减少代码*/
+            background: linear-gradient(white, white) padding-box, url(../../img/border-imagev2.png) border-box 0 / cover;
+
+        }
+
+        .old-envelop{
+            /*bkposition/bksize**/
+            padding:1em;
+            border: 1em solid transparent;
+            background: linear-gradient(white ,white) padding-box,
+                        repeating-linear-gradient(-45deg, red 0, red 12.5%, transparent 0, transparent 25%, #58a 0, #58a 37.5%, transparent 0, transparent 50%) 0 / 5em 5em;
+        }
+
+        .old-envelop-border-image{
+            padding: 1em;
+            border: 16px solid transparent;
+            /* 不能在border-image-slice中使用em单位 只能指定像素单位
+             修改 border-image-slice 需同时修改 border-width
+             条纹的宽度需要在色标的位置信息中写好 在改变条纹时需修改4处 ??? */
+            border-image: 16 repeating-linear-gradient(-45deg, red 0, red 1em, transparent 0, transparent 2em, #58a 0, #58a 3em, transparent 0, transparent 4em);
+        }
+        @keyframes ants {
+            to{background-position: 100%;}
+        }
+        .ant-marching-frame{
+            padding: 1em;
+            border: 1px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                repeating-linear-gradient(-45deg, black 0, black 25%, white 0, white 50%) 0 / .6em .6em;
+            animation: ants 12s linear infinite;
+        }
+        .footnote-border-image{
+            border-top: .2em solid transparent;
+            border-image: 100% 0 0 linear-gradient(90deg, currentColor 4em, transparent 0);
+            padding-top: 1em;
+        }
+    </style>
+</head>
+<body>
+    <div class="border-image"></div>
+    <div class="border-image-container">
+        <div>I have a nice strong art border, don't i look pretty.
+        使用一个额外的HTML元素  作为背景 不够理想 外围设了宽度就超出啦容器 不设宽度正常显示
+        </div>
+    </div>
+
+    <div class="background-clip">背景与边框引入了对css渐变和背景的扩展 思路: 在石雕背景图片之上 叠加一层纯白的实色背景。
+    为了让下层的背景图片透过边框区域显示出来 给两层背景指定不同的 background-clip值
+    要点: 只能在多重背景的最底层设置背景色 因此需要用一道从白色过渡到白色的CSS渐变来模拟出纯白色实背景的效果
+
+    <br/>
+        这个结果跟我们想要的已经非常接近 了。但边框的图片有一种怪异的拼接效果。原因是 background-origin 的 默认值是 padding-box,
+        因此,图片的显示尺寸不仅取决于 padding box 的 尺寸,而且被放置在了 padding box 的原点(左上角)。
+        我们看到的实际上 就是背景图片以平铺的方式蔓延到 border box 区域的效果。为了修正这个问 题,
+        只需把 background-origin 也设置为 border-box 就可以了:
+    </div>
+
+    <div class="old-envelop">
+        老式信封 用background 和 background-clip实现
+    </div>
+
+    <div class="old-envelop-border-image">
+        老式信封 用 border-image实现
+    </div>
+    <div class="ant-marching-frame">
+        蚂蚁行军框
+    </div>
+
+    <div class="footnote-border-image">border-image生成脚注</div>
+</body>
+</html>

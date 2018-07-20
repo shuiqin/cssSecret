@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滤镜</title>
+    <style>
+        .shadow{
+            color: deeppink;
+            /*border: 2px solid;*/
+            text-shadow: .1em .2em yellow;
+            filter: drop-shadow(.5em .5em 1em blue);
+        }
+        .dotted{
+            margin-top:30px;
+            border: 16px dotted green;
+            box-shadow: 6px 6px 6px red;;
+        }
+        .dotted-filter{
+            margin-top:30px;
+            border: 16px dotted green;
+            filter: drop-shadow(6px 6px 6px red);
+        }
+    </style>
+</head>
+<body>
+    <div class="shadow">Hello mis.文字同时被打上了text-shadow和drop-shadow</div>
+    <div class="dotted">打阴影</div>
+    <div class="dotted-filter">打阴影使用滤镜</div>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>菱形图片</title>
+    <style type="text/css">
+        div{
+            margin:30px;
+        }
+        .diamon-pic{
+            width: 100px;
+            height:100px;
+            transform: rotate(45deg);
+            overflow:hidden;
+        }
+        .diamon-pic > img{
+            max-width: 100%;
+            transform: rotate(-45deg) scale(1.42);
+        }
+        /*
+        主要问题在于max-width: 100%这条声明。100%会被解析为容器 (.picture)的边长。但是,我们想让图片的宽度与容器的对角线相等,而 不是与边长相等。你可能已经猜到了,没错,我们又要用到勾股定理了(如 果你需要复习一下,请翻回“斜向条纹”一节)。这个定理告诉我们,一个 正方形的对角线长度等于它的边长乘以 2 ≈ 1.414 213 562 。因此,把 max- width 的值设置为 2 ×100% ≈ 414.421 356 2% 是很合理的,或者把这个值 向上取整为 142%,因为我们不希望因为计算的舍入问题导致图片在实际显
+        示时稍小(但稍大是没问题的,反正我们都是在裁切图片嘛)。
+        如果用 scale() 变形样式来把这个图片放大,实际上会更加合理,原
+        因如下。
+         我们希望图片的尺寸属性保留 100% 这个值,这样当浏览器不支持变
+        形样式时仍然可以得到一个合理的布局。
+         通过 scale() 变形样式来缩放图片时,是以它的中心点进行缩放的 (除非我们额外指定了 transform-origin 样式)。通过 width 属性 来放大图片时,只会以它的左上角为原点进行缩放,从而迫使我们
+        动用额外的负外边距来把图片的位置调整回来。
+
+       缺点: 额外dom 不够健壮 不能处理非正方形的图片
+        */
+        /*clip path能很好的处理非正方形的图片*/
+        .clip-path{
+            clip-path:polygon(50% 0, 100% 50%, 50% 100%, 0 50%);
+            width:142px;
+            transition:  1s clip-path;
+        }
+        .clip-path:hover{
+            clip-path: polygon(0 0 , 100% 0, 100% 100%, 0 100%);
+        }
+    </style>
+</head>
+<body>
+    <div class="diamon-pic">
+        <img src="../../img/diamond1.jpg" alt="diamond picture"/>
+    </div>
+
+    <img class="clip-path" src="../../img/diamond1.jpg" alt="diamond picture"/>
+
+    <img class="clip-path" src="../../img/diamond.png" alt="diamond picture"/>
+
+
+</body>
+</html>

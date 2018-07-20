@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>连字符断行</title>
+    <style type="text/css">
+        .hyphen{
+            text-align: justify;
+            width: 120px;
+            background: red;
+            margin: 20px auto;
+            padding: 5px;
+        }
+        .hyphenv1{
+            hyphens: auto;/*添加连字符*/
+        }
+        .hyphenv2{
+            hyphens:none;
+        }
+        .hyphenv3{
+            hyphens: manual; /*现有的工作方式*/
+        }
+        .amp{
+            font-family: Baskerville, "Goudy Old Style",
+            Garamond, Palatino, serif;
+            font-style: italic;
+        }
+
+        @font-face {
+            font-family: Ampersand;
+            /*
+            我们唯一的出路有些 hack 的味道:不去指定字体的家族名
+            (family name),而是直接指定字体中我们想要的单个风格/字重所对应的
+            “PostScript 名称”1。因此,为了指定这些字体的斜体版本,最终的代码会 1
+            **/
+            src: local('Baskerville-Italic'),
+            local('GoudyOldStyleT-Italic'),
+            local('Palatino-Italic'),
+            local('BookAntiqua-Italic');
+            /*
+            src: local('Baskerville'),
+            local('GoudyOldStyleT'),
+            local('Palatino'),
+            local('BookAntiqua');*/
+            /*"&".charCodeAt(0).toString(16); // 返回26*/
+            unicode-range: U+26;
+            /*firfox支持性不好 不支持会把该字体用在所有文本里 这样不好
+            回退方案参考最后: https://24ways.org/2011/creating-custom-font-stacks-with-unicode-range/*/
+        }
+        .unicode-range {
+            font-family: Ampersand;
+        }
+
+        .text-decoration{
+            border-bottom: 1px solid gray;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="hyphen">The only way to get rid of a temptation is to yield to it</div>
+    <div class="hyphen hyphenv1">The only way to get rid of a temptation is to yield to it</div>
+
+    <div class="hyphen hyphenv1 text-decoration">The only way to get rid of a temptation is to yield to it</div>
+
+    <div class="hyphen hyphenv1">The only way to get rid of a &shy temptation is to yield to it</div>
+    <div class="hyphen hyphenv2">The only way to get rid of a &shy temptation is to yield to it</div>
+    <div class="hyphen hyphenv3">The only way to get rid of a temptation is to yield to it</div>
+
+    <div>HTML <span class="amp">&amp;</span> CSS</div>
+
+    <div class="unicode-range"> HTML &amp CSS</div>
+</body>
+</html>

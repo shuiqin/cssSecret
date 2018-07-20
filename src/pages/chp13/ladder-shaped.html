@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        .tab{
+            position: relative;
+            display:inline-block;
+            padding: .5em 1em .35em;
+            color:white;
+            margin:5em;
+            /*filter: drop-shadow(5px 5px 5px red);*对3d的不起作用???*/
+            box-shadow: 5px 5px 5px red;/*box-shadoe对不规则图形支持的不好*/
+        }
+        /** issues:很难自适应
+        斜边的角度依赖于元素的宽度 当元素长度不等时 想得到倾斜度一致的梯形就很伤脑筋 对宽度变化不大的多个元素 还是管用的
+        */
+        .tab::before{
+            content:'';/*用伪元素来生成一个矩形*/
+            position:absolute;
+            top:0;
+            right: 0;
+            left: 0;
+            bottom: 0;
+            z-index: -1;
+            background: #58a;
+            transform: scaleY(1.5) perspective(.5em) rotateX(5deg); /**perspective会使高度缩水 scaleY可拉伸高度*/
+            /*perspective(3em) 角度确定???**/
+            transform-origin: bottom; /**p104 解决这个问题 :元素以它自身的中心线为轴进行空间上的旋转。 因此,元素投射到 2D 屏幕上的尺寸会发生多种变化*/
+        }
+
+        nav > a {
+            position: relative; display: inline-block; padding: .3em 1em 0;
+        }
+        nav > a::before { content: '';
+            position: absolute;
+            top: 0; right: 0; bottom: 0; left: 0; z-index: -1;
+            background: #ccc;
+            background-image: linear-gradient(
+                    hsla(0,0%,100%,.6),
+                    hsla(0,0%,100%,0)); border: 1px solid rgba(0,0,0,.4);
+            border-bottom: none;
+            border-radius: .5em .5em 0 0;
+            box-shadow: 0 .15em white inset;
+            transform: perspective(.5em) rotateX(5deg);
+            /*transform-origin: bottom;*/
+            transform-origin: bottom left;
+        }
+        .right-nav > a::before{
+            transform-origin: bottom right;
+        }
+    </style>
+</head>
+<body>
+    <div class="tab">
+        对元素使用了 3D
+        变形之后,其内部的变形效应是“不可逆转”的,这一点跟 2D 变形不同 (在 2D 变形的体系之下,内部的逆向变形可以抵消外部的变形效应)。取消 其内部的变形效应在技术上是有可能的,但非常复杂。因此,如果我们想发 挥 3D 变形的功能来生成梯形,唯一可行的途径就是把变形效果作用在伪元
+        素上
+    </div>
+
+    <nav>
+        <a href="index.asp">Home</a>
+        <a href="html5_meter.asp">Previous</a>
+        <a href="html5_noscript.asp">Next</a>
+    </nav>
+
+    <nav class="right-nav">
+        <a href="index.asp">Home</a>
+        <a href="html5_meter.asp">Previous</a>
+        <a href="html5_noscript.asp">Next</a>
+    </nav>
+</body>
+</html>

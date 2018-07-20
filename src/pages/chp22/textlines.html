@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>问本行的斑马条纹</title>
+    <style type="text/css">
+        .textlines{
+            padding: .5em;
+            line-height: 1.5;
+            background: beige;
+            background-image: linear-gradient(
+                rgba(0,0,0,.2) 50%, transparent 0);
+            /*唯一可能破坏效果的 情况2可能就是在改变 line-height 时忘了相应地调整 background-size。*/
+            /*在其他情况下,如果有行内元素把行框撑得比常 规行高更大(比如有张图片或行内元素设置了更大的字号),则这个效果也会被破坏。*/
+            background-size: auto 3em;
+            /*告诉浏览器在解析 background-position 时以 content box 的外沿作为基准,
+            而不是默认的 padding box 外*/
+            background-origin: content-box;
+            /*background-clip: content-box;*/
+        }
+    </style>
+</head>
+<body>
+    <div class="textlines">
+        .textlines{ <br/>
+        padding: .5em;<br/>
+        line-height: 1.5;<br/>
+        background: beige;<br/>
+        background-image: linear-gradient(<br/>
+        rgba(0,0,0,.2) 50%, transparent 0); background-size: auto 3em;<br/>
+        }
+        <pre>.textlines{</pre>
+    </div>
+</body>
+</html>

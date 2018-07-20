@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        div{
+            background: #fb3;
+            margin: 10px;
+        }
+        .circle{
+            width: 100px;
+            height: 100px;
+            border-radius: 100px;
+        }
+        .semiellipse{
+            width: 100px;
+            height: 100px;
+            border-radius: 50% / 100% 100% 0 0;
+        }
+        .semiellipse-v1{
+            width: 100px;
+            height: 100px;
+            border-radius: 100% 0 0 100%/50%;
+        }
+        .semiellipse-v2 {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%/ 0 0 100% 100%
+        }
+        .semiellipse-v3{
+            width: 100px;
+            height: 100px;
+            border-radius:  0 100% 100% 0 / 50%;
+        }
+        .half-circle{
+            width: 200px;
+            height: 100px;
+            border-radius: 50% / 100% 100% 0 0;
+        }
+        .forth-ellipse{
+            width: 100px;
+            height: 100px;
+            border-radius: 100% 0 0 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="circle">圆形</div>
+    <div class="semiellipse">半椭圆</div>
+    <div class="semiellipse-v1">半椭圆</div>
+    <div class="semiellipse-v2">半椭圆</div>
+    <div class="semiellipse-v3">半椭圆</div>
+
+    <div class="half-circle">半圆:半椭圆是可以变成半圆的,只要它的宽度刚好伸展到高度的两倍(或者对一个沿纵轴劈开的 椭圆来说,是高度伸展为宽度的两倍)。
+    </div>
+
+    <div class="forth-ellipse">
+        1/4椭圆
+    </div>
+</body>
+</html>

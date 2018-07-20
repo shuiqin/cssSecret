@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        div{
+            margin: 15px;
+        }
+        .pie{
+            width: 100px;
+            height: 100px;
+            background: yellowgreen;
+            border-radius: 50%;
+            background-image: linear-gradient(to right, transparent 50%, #655 0);
+            /*不希望伪元素呈现矩形形状 给pie设置overflow**/
+            overflow:hidden;
+        }
+        /**无法为伪元素设置内联样式
+            解决方案: 使用动画 且使动画处于暂停状态,
+             用负的动画延时来直接跳到动画中的任意时间点 并定格在那里
+        */
+        .pie::before{
+            content: "";
+            display:block;
+            margin-left: 50%;
+            height: 100%;
+            /*继承父元素背景色 避免代码重复*/
+            background-color: inherit;
+            /*绕着圆形的圆心转 即它自己左边缘的中心点**/
+            transform-origin: 0 50%;
+            /*不希望它呈现矩形形状 给pie设置overflow **/
+            /**不希望它呈现矩形形状  也可以把自己画成半圆*/
+            border-radius: 0 100% 100% 0 / 50%;
+            /**rotate让伪元素转起来 0.2turn即 20%的圆 即转 0.2*360度*/
+            /*transform:rotate(0.2turn);*/
+            animation: spin 3s linear infinite, bg 6s step-end infinite;
+        }
+
+        @keyframes spin{
+            to{transform: rotate(.5turn);}
+        }
+        @keyframes bg {
+            50% {background: #655;}
+        }
+        .pie-v2{
+            background-image: linear-gradient(to right, transparent 10%, #655 0);
+
+        }
+
+
+        .pie-v3{
+            width: 100px;
+            height: 100px;
+            line-height: 100px;/*使文字处置居中 100%不行*/
+            background: yellowgreen;
+            border-radius: 50%;
+            background-image: linear-gradient(to right, transparent 50%, #655 0);
+            /*不希望伪元素呈现矩形形状 给pie设置overflow**/
+            overflow:hidden;
+            position:relative;
+            text-align: center;/*文字居中*/
+            z-index: 1; /*必须加 p111 issues未加*/
+        }
+        /**无法为伪元素设置内联样式
+            解决方案: 使用动画 且使动画处于暂停状态,
+             用负的动画延时来直接跳到动画中的任意时间点 并定格在那里
+        */
+        .pie-v3::before{
+            position: absolute;/*使用绝对定位来完成对伪元素的尺寸设置和定位操作 这样不会把文字推到下面去*/
+            top: 0;
+            left: 0%; /*p111 issues*/
+            z-index: -1;/*必须加p111 issues**/
+            width: 50%;/*p111 issues 绝对定位需要设置尺寸*/
+            content: "";
+            display:block;
+            margin-left: 50%;
+            height: 100%;
+            line-height: 100%;
+            /*继承父元素背景色 避免代码重复*/
+            background-color: inherit;
+
+            /*绕着圆形的圆心转 即它自己左边缘的中心点**/
+            transform-origin: 0 50%;
+            /*不希望它呈现矩形形状 给pie设置overflow **/
+            /**不希望它呈现矩形形状  也可以把自己画成半圆*/
+            border-radius: 0 100% 100% 0 / 50%;
+            /**rotate让伪元素转起来 0.2turn即 20%的圆 即转 0.2*360度*/
+            /*transform:rotate(0.2turn);*/
+            animation: spin 50s linear infinite, bg 100s step-end infinite; /*方便计算百分比 将动画时间设为100s*/
+
+            animation-play-state:paused;
+            /*“一个负的延时值是合法的。与 0s 的延时类似,它意味着动画会立即 开始播放,但会自动前进到延时值的绝对值处,
+            就好像动画在过去已经播 放了指定的时间一样。因此实际效果就是动画跳过指定时间而从中间开始 播放了。”*/
+            animation-delay: inherit;;
+
+        }
+        /**svg解决方案*/
+         circle{
+            fill:yellowgreen;
+            stroke: #655;
+            stroke-width: 30;
+            stroke-dasharray: 20 10;
+        }
+
+        .circlev1{
+            /**
+            虚线描边的线段长度指 定为 0,并且把虚线间隙的长度设置为等于或大于整个圆周的长度时,
+            答案 就会浮出水面了。(这里做个简单的计算,圆形的周长 C = 2πr,因此在这里 C=2π × 30 ≈ 189。)
+            */
+            stroke-dasharray: 0 189;
+        }
+        .circlev2 {
+            stroke-dasharray: 40 189;
+        }
+        .circlev3 {
+            stroke-dasharray: 95 189;
+        }
+        .circlev4 {
+            stroke-dasharray: 150 189;
+        }
+        .circlev5{
+            stroke-width: 50;
+            stroke-dasharray: 60 158;
+        }
+
+        .circlev6{
+            fill:yellowgreen;
+            stroke: #655;
+            stroke-width: 50;
+            stroke-dasharray: 0 158;
+            animation: fillup 5s linear infinite;
+        }
+        svg{
+            background-color: yellowgreen;
+            border-radius: 50%;
+            width:100px;
+            height:100px;
+        }
+        .circlev6-svg{
+            transform:rotate(-90deg);
+            width:100px;
+            height: 100px;
+        }
+        @keyframes fillup {
+            to {
+                stroke-dasharray: 158 158;
+            }
+        }
+        .circlev7{
+            stroke-width: 32;
+            stroke-dasharray: 38 100; /* 可得到比率为38%的扇区 */
+        }
+        .circlev8{
+            stroke-width: 32;
+            stroke-dasharray: 18 100; /* 可得到比率为38%的扇区 */
+            stroke:red;
+            stroke-dashoffset: -38;
+            fill:transparent;
+        }
+    </style>
+</head>
+<body>
+    <div class="pie">由伪元素、变形属性和 CSS 渐变来实现的</div>
+
+    <div class="pie-v2 pie">由伪元素、变形属性和 CSS 渐变来实现的</div>
+
+    <div class="pie-v3" style="animation-delay: -20s">20%</div>
+
+    <div class="pie-v3" style="animation-delay: -60s">60%</div>
+
+    <div class="pie-container">
+        <svg width="100" height="100">
+            <circle r="30" cx="50" cy="50">stroke-dasharray生成简单的虚线描边</circle>
+        </svg>
+
+        <svg width="100" height="100">
+            <circle class="circlev1" r="30" cx="50" cy="50">stroke-dasharray生成简单的虚线描边</circle>
+        </svg>
+
+        <svg width="100" height="100">
+            <circle class="circlev2" r="30" cx="50" cy="50">stroke-dasharray生成简单的虚线描边</circle>
+        </svg>
+        <svg width="100" height="100">
+            <circle class="circlev3" r="30" cx="50" cy="50">stroke-dasharray生成简单的虚线描边</circle>
+        </svg>
+        <svg width="100" height="100">
+            <circle class="circlev4" r="30" cx="50" cy="50">stroke-dasharray生成简单的虚线描边</circle>
+        </svg>
+
+        <svg width="100" height="100">
+            <circle class="circlev5" r="25" cx="50" cy="50">将内圆半径设为25得到类似扇形的</circle>
+        </svg>
+
+        <svg width="100"  class="circlev6-svg" height="100">
+            <circle class="circlev6" r="25" cx="50" cy="50">得到最终扇形</circle>
+        </svg>
+
+        <svg class="circlev7-svg circlev6-svg" viewBox="0 0 32 32"><!--viewbox可自动适应容器尺寸-->
+            <circle class="circlev7" r="15.9" cx="16" cy="16">给圆指定半径16 使其周长为100  100/2pi</circle>
+            <circle class="circlev8" r="15.9" cx="16" cy="16">给圆指定半径16 使其周长为100  100/2pi</circle>
+
+        </svg>
+
+
+    </div>
+
+    <div class="svg-pie">20%</div>
+    <div class="svg-pie">50%</div>
+</body>
+<script type="application/javascript">
+    var elems = document.getElementsByClassName('svg-pie');
+    for(var i = 0 ; i < elems.length; i++){
+        var pie = elems[i];
+        var p = parseFloat(pie.textContent);
+        var NS = "http://www.w3.org/2000/svg";
+        var svg = document.createElementNS(NS, "svg");
+        var circle = document.createElementNS(NS, "circle");
+        var title = document.createElementNS(NS, "title");
+        circle.setAttribute("r", 15.92);
+        circle.setAttribute("cx", 16);
+        circle.setAttribute("cy", 16);
+        circle.setAttribute("stroke-width", 32); /*属性优先级低于class*/
+        circle.setAttribute("stroke-dasharray", p + " 100");
+        circle.setAttribute('style','stroke-width:32;stroke-dasharray:' + p + ' 100')
+        svg.setAttribute("viewBox", "0 0 32 32");
+        title.textContent = pie.textContent; pie.textContent = '';
+        svg.appendChild(title);
+        svg.appendChild(circle);
+        pie.appendChild(svg);
+    }
+
+
+</script>
+</html>

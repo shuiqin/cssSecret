@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>调整tab的宽度</title>
+    <style type="text/css">
+        pre:nth-of-type(2){
+            font-family: monospace;
+            tab-size: 0;
+        }
+        pre:nth-of-type(1){
+            font-family: monospace;
+            tab-size: 1;
+        }
+        pre:nth-of-type(3){
+            font-family: monospace;
+            tab-size: 4;
+        }
+        pre{
+            display: block;
+            margin: 1em 0;
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+
+<pre><code>// tab-size:1;
+while (true) {
+	var d = new Date();
+	if (d.getDate()==1 &amp;&amp;
+	    d.getMonth()==3) {
+		alert("TROLOLOL");
+	}
+}</code></pre>
+<pre><code>// tab-size: 0;
+while (true) {
+	var d = new Date();
+	if (d.getDate()==1 &amp;&amp;
+	    d.getMonth()==3) {
+		alert("TROLOLOL");
+	}
+}</code></pre>
+
+<pre><code>// tab-size: 4;
+while (true) {
+	var d = new Date();
+	if (d.getDate()==1 &amp;&amp;
+	    d.getMonth()==3) {
+		alert("TROLOLOL");
+	}
+}</code></pre>
+
+<pre><code>// defualt size
+while (true) {
+	var d = new Date();
+	if (d.getDate()==1 &amp;&amp;
+	    d.getMonth()==3) {
+		alert("TROLOLOL");
+	}
+}</code></pre>
+<pre><code>
+function aa(){
+	var dd = 11;
+}
+</code></pre>
+</body>
+</html>

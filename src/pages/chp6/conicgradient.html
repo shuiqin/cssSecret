@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>角向渐变 蝉原则</title>
+    <style type="text/css">
+        div{
+            margin:10px;
+        }
+        .conic-gradient{
+            background: conic-gradient(red, yellow, lime, aqua,blue,fuchsia,red);
+            background: repeating-conic-gradient(#bbb 0, #bbb 25%, #eee 0, #eee 50%);
+            background-size: 30px 30px;
+            /* leaverou.github.io/conic- gradient 找到一个 polyfill*/
+        }
+        .chess-svg{
+            width:100vw;
+            height:30vh;
+            margin:10px;
+            background: #eee url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill-opacity="0.25">\
+            <rect x="50" width="50" height="50"></rect>\
+            <rect y="50" width="50" height="50"></rect>\
+            </svg>');
+            /*用\分行**/
+            background-size:30px 30px;
+        }
+        .random-gradial{
+            height:30vh;
+            background:hsl(20, 40%, 90%);
+            background-image: linear-gradient(90deg, #fb3 10px, transparent 0),
+                    linear-gradient(90deg, #ab4 20px, transparent 0),
+                    linear-gradient(90deg, #655 20px, transparent 0);
+            background-size: 80px 100%, 60px 100%, 40px 100%;
+            /*240px后开始重复 最小公倍数**/
+            /*使用质数 增加随机真实感**/
+        }
+        .random-gradial-real{
+            background-size: 79px 100%, 59px 100%, 38px 100%;
+        }
+        .random-gradial-real-2{
+            background-image: linear-gradient(90deg, #fb3 7px, transparent 0),
+            linear-gradient(90deg, #ab4 19px, transparent 0),
+            linear-gradient(90deg, #655 23px, transparent 0);
+        }
+        .blend-composite{
+            background-blend-mode: difference;
+        }
+        .random-gradial-1{
+            height:30vh;
+            background:hsl(20, 40%, 90%);
+            background-image: linear-gradient(90deg, #fb3 10px, transparent 0);
+            background-size: 80px 100%;
+        }
+        .random-gradial-2{
+            height:30vh;
+            background:hsl(20, 40%, 90%);
+            background-image:
+            linear-gradient(90deg, #ab4 20px, transparent 0);
+            background-size: 60px 100%;
+        }
+        .random-gradial-3{
+            height:30vh;
+            background:hsl(20, 40%, 90%);
+            background-image:
+            linear-gradient(90deg, #655 20px, transparent 0);
+            background-size:  40px 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="conic-gradient">
+        角向渐变
+    </div>
+
+    <svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill-opacity="0.25">
+        <rect x="50" width="50" height="50"></rect>
+        <rect y="50" width="50" height="50"></rect>
+    </svg>
+
+    <div class="chess-svg">
+        将svg直接写在css里
+    </div>
+    <div class="random-gradial">
+        更真实的模仿条纹随机性 最顶层贴片的重复规律最容易被察觉(没有被任何东西遮挡) 把平铺间距最大的贴片安排在最顶层(橙色条纹)
+    </div>
+    <div class="random-gradial random-gradial-real">
+        增加质数size 增加随机真实感 详见css
+    </div>
+    <div class="random-gradial random-gradial-real random-gradial-real-2">
+        进一步增加随机感 用质数指定各组条纹宽度 增加随机真实感 详见css
+    </div>
+    <div class="random-gradial blend-composite">
+        更真实的模仿条纹随机性以混合模式
+    </div>
+
+    <div class="random-gradial-1">
+        拆分上述条纹1
+    </div>
+    <div class="random-gradial-2">
+        拆分上述条纹2
+    </div>
+    <div class="random-gradial-3">
+        拆分上述条纹3
+    </div>
+</body>
+</html>

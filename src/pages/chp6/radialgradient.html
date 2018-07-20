@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>波点</title>
+    <style type="text/css">
+        div{
+            width: 100vw;
+            height: 30vh;
+            margin:5px;
+        }
+        .antinode-v1{
+            background: #655;
+            background-image: radial-gradient(tan 30%, transparent 0);
+            background-size: 30px 30px;
+        }
+        .antinode-v2{
+            background: #655;
+            background-image: radial-gradient(tan 30%, transparent 0),
+                            radial-gradient(tan 30%, transparent 0);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;
+            /*第二层背景的偏移定位必须是贴片宽高的一半  缺点 改宽高要改4处*/
+            /*可使用与处理器的mixin*/
+        }
+        .antinode-v3{
+            background: #eee;
+            background-image:linear-gradient(45deg, #bbb 50%, transparent 0);
+            background-size: 30px 30px;
+        }
+        .antinode-v4{
+            background: #eee;
+            background-image:linear-gradient(45deg, transparent 75%,   #bbb 0);
+            background-size: 30px 30px;
+        }
+
+        .antinode-v5{
+            background: #eee;
+            background-image:linear-gradient(45deg,  #bbb  25%, transparent 0);
+            background-size: 30px 30px;
+        }
+        .antinode-v6{
+            background: #eee;
+            background-image:linear-gradient(45deg,transparent 75%,   #bbb 0), linear-gradient(45deg,  #bbb  25%, transparent 0),
+            linear-gradient(45deg,transparent 75%,   #bbb 0), linear-gradient(45deg,  #bbb  25%, transparent 0);
+            background-position:0 0,15px 15px , 15px 15px, 30px 30px; /*最后一个也可以是0 0*/
+            background-size: 30px 30px;
+        }
+        .antinode-v7{
+            background: #eee;
+            background-image:linear-gradient(45deg,transparent 75%,   rgba(0,0,0, 0.25) 0), linear-gradient(45deg,  rgba(0,0,0, 0.25)  25%, transparent 0),
+            linear-gradient(45deg,transparent 75%,  rgba(0,0,0, 0.25) 0), linear-gradient(45deg, rgba(0,0,0, 0.25) 25%, transparent 0);
+            background-position:0 0,15px 15px , 15px 15px, 30px 30px; /*最后一个也可以是0 0*/
+            background-size: 30px 30px;
+        }
+
+        .antinode-v8{
+            background: #eee;
+            background-image:linear-gradient(45deg,rgba(0,0,0, 0.25) 25%, transparent 0 , transparent 75%,   rgba(0,0,0, 0.25) 0),
+            linear-gradient(45deg,  rgba(0,0,0, 0.25)  25%, transparent 0,
+           transparent 75%,  rgba(0,0,0, 0.25) 0);
+            background-position:0 0,15px 15px ; /*最后一个也可以是0 0*/
+            background-size: 30px 30px;
+        }
+        /*
+
+        @mixin checkerboard($size, $base, SCSS $accent: rgba(0,0,0,.25)) {
+back    ground: $base; background-image:
+        linear-gradient(45deg,
+        $accent 25%, transparent 0,
+        transparent 75%, $accent 0), linear-gradient(45deg,
+        $accent 25%, transparent 0,
+        transparent 75%, $accent 0);
+        background-position: 0 0, $size $size,
+        background-size: 2*$size 2*$size;
+        }
+        @include checkerboard(15px, #58a, tan);
+        */
+        .antinode-v4-test{
+            background: #eee;
+            background-image:linear-gradient(45deg,  #bbb 75%,  transparent 0);
+            background-size: 30px 30px;
+        }
+
+        .antinode-v5-test{
+            background: #eee;
+            background-image:linear-gradient(45deg, transparent  25%,  #bbb 0);
+            background-size: 30px 30px;
+        }
+        /*why */
+        .antinode-v6-test{
+            background: #eee;
+            background-image:linear-gradient(45deg,  #bbb 75%,  transparent 0), linear-gradient(45deg,  transparent  25%,  #bbb 0),
+            linear-gradient(45deg, #bbb 75%,  transparent 0), linear-gradient(45deg, transparent  25%,  #bbb 0);
+            background-position:0 0,15px 15px , 15px 15px, 0 0;
+            background-size: 30px 30px;
+        }
+    </style>
+</head>
+<body>
+    <div class="antinode-v1">波点初步</div>
+    <div class="antinode-v2">生成两层圆点阵列图案 并把她们的背景定位错开 以得到真正的波点图案</div>
+    <div class="antinode-v3">若干三角形</div>
+    <div class="antinode-v4">若干三角形 大小是原来的1/4 位置右上</div>
+    <div class="antinode-v5">若干三角形 大小是原来的1/4 位置左下</div>
+    <div class="antinode-v6">若干三角形 大小是原来的1/4 位置左下 右上 以上喝起来</div>
+    <div class="antinode-v7">颜色优化 将深灰色改成半透明色调 改变颜色只需改变背景色即可</div>
+    <div class="antinode-v8">将4层渐变简化成两层</div>
+
+
+    <div class="antinode-v4-test">若干三角形 大小是原来的1/4 位置右上</div>
+    <div class="antinode-v5-test">若干三角形 大小是原来的1/4 位置左下</div>
+    <div class="antinode-v6-test">若干三角形 大小是原来的1/4 位置左下 右上 以上喝起来</div>
+
+
+</body>
+</html>

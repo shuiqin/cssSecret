@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>插入式换行</title>
+    <style>
+        dd, dt{
+            display: inline;
+        }
+
+        dd::after{
+            /*
+            从技术上来说,0x000A 相当于“换行”字符,也就是我们在 JavaScript 中常写的 "\n"。
+            另 外还有一个“回车”字符(即 JavaScript 中的 "\r",CSS 中的 "\D"),
+            不过我们在现代浏览器中已经不需要用到这个字符了。
+            */
+            /*content: "\A";*/
+            /*因此任何 pre 值都可以起作用(pre、pre-line 或 pre- wrap)。
+            我推荐 pre,因为它的浏览器支持程度最好*/
+            white-space: pre;/*插入式换行*/
+        }
+        /*
+        只在后面还跟着一 个 <dd> 的 <dd> 尾部插入逗号”,但我们又一次遇上了那个限制,
+        眼下的 CSS 选择符还表达不出这种需求。因此,我们再次调整思路,在每个前面有 <dd> 的 <dd> 头部插入逗号
+        */
+        dd + dd::before {
+            content: ', ';
+            font-weight: normal;
+        }
+        dt{
+            margin-right: 1em;
+        }
+        dd{
+            margin-left: 0;
+        }
+
+        /*
+        dt:not(:first-child)::before
+         dd + dt::before (相邻选择器)
+          dt ~ dt::before(匹配选择器 匹配所有在dt之后的同级dt)
+         https://www.cnblogs.com/zqzjs/p/4676138.html
+
+          dt ~ dt因为即使是在多个 <dt> 共用同一个值的场 景下,它也是可以正常工作的;
+         而另外两者在这种情况下还是会出问题。
+        */
+        dd ~ dt::before{
+            /*
+           从技术上来说,0x000A 相当于“换行”字符,也就是我们在 JavaScript 中常写的 "\n"。
+           另 外还有一个“回车”字符(即 JavaScript 中的 "\r",CSS 中的 "\D"),
+           不过我们在现代浏览器中已经不需要用到这个字符了。
+           */
+            content: "\A";
+            /*因此任何 pre 值都可以起作用(pre、pre-line 或 pre- wrap)。
+            我推荐 pre,因为它的浏览器支持程度最好*/
+            white-space: pre;/*插入式换行*/
+        }
+        /*我们只想针对 <dt> 之前的最后一个 <dd> 来插入换行, 而不是对所有的 <dd> 都这样做。
+        不过,这对于当前 CSS 选择符的功能来说 还是不可能的,因为选择符无法做到先在 DOM 树中选中主体元素,
+        再倒回 去查询它之前的元素。我们需要换种方式来思考。一个想法就是换行符不用 加在 <dd> 的后面,而是加在 <dt> 的前面*/
+    </style>
+</head>
+<body>
+    <div>
+        <dt>Name:</dt>
+        <dd>Nick</dd>
+
+        <dt>Name:</dt>
+        <dd>Sarah</dd>
+        <dd>每个dd插入式换行不够健壮多个dd就表现不对</dd>
+
+        <dt>Name:</dt>
+        <dd>Nick</dd>
+    </div>
+</body>
+</html>

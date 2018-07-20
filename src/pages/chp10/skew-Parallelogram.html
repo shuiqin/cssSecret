@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>平行四边形</title>
+    <style type="text/css">
+        div{
+            margin: 10px;
+        }
+        .parallelogram-btn{
+            transform: skewX(-45deg);/* skew(-45deg)*/
+            background: green;
+        }
+        .parallelogram-btn>div{
+            transform: skew(45deg);/**文字转回来 */
+        }
+
+        .button{
+            width: 100px;
+            line-height: 1.5em;
+            text-align: center;
+        }
+        .button-pseudo{
+            position:relative;
+        }
+        .button-pseudo:after{
+            content: "";
+            background: yellow;
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            z-index: -1;
+            /*
+            自动继承其宿主元素的尺寸, 甚至当宿主元素的尺寸是由其内容来决定时仍然如此。
+            一个简单的办法是 给宿主元素应用 position: relative 样式,
+            并为伪元素设置 position: absolute,然后再把所有偏移量设置为零,
+            以便让它在水平和垂直方向上都 被拉伸至宿主元素的尺寸
+            */
+            transform: skew(-45deg);
+        }
+        .round-corner{
+            z-index: 1;
+            border-radius: 10px;
+            position:relative;
+            background: green;
+            padding:30px;
+            border:10px;
+        }
+        .round-corner:after{
+            border-radius:10px;
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 5px solid #fff; /*useless*/
+            background: #fff;
+
+        }
+
+        .borders {
+            position: relative;
+            z-index: 1;
+            padding: 30px;
+            border: 5px solid #f00;
+            background: #ff9600;
+        }
+
+        .borders:before {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 5px;
+            left: 5px;
+            right: 5px;
+            bottom: 5px;
+            border: 5px solid #ffea00;
+            background: #4aa929;
+        }
+
+        .borders:after {
+            content: "";
+            position: absolute;
+            z-index: -1;
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border: 5px solid #00b4ff;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="parallelogram-btn button"><div class="btn-text">Click me</div></div>
+    <!--使用伪元素实现与上面一样效果-->
+    <div class="button-pseudo button">Click me</div>
+    <div class="round-corner">使用伪元素实现边框边框内圆角</div>
+    <div class="borders"></div>
+</body>
+</html>

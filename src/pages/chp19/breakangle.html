@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body{
+            background-color: darkred;
+        }
+        .note {
+            position: relative;
+            width: 30%;
+            padding: 1em 1.5em;
+            margin: 2em auto;
+            color: #fff;
+            background: #97C02F;
+            overflow: hidden;
+        }
+
+        .note:before {
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            border-width: 0 16px 16px 0;/*上 右 下 左的顺序**/
+            border-style: solid;
+            border-color: red red #658E15 #658E15; /*上 右 下 左的顺序**/
+            background: #658E15;
+            -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+            -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+            box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+            /* Firefox 3.0 damage limitation */
+            display: block; width: 0;
+        }
+
+        .note.rounded {
+            -moz-border-radius: 5px 0 5px 5px;
+            border-radius: 5px 0 5px 5px;
+        }
+
+        .note.rounded:before {
+            border-width: 8px;
+            border-color: #fff #fff transparent transparent;
+            -moz-border-radius: 0 0 0 5px;
+            border-radius: 0 0 0 5px;
+        }
+
+        .breakangle{
+            background: #58a;/*回退样式*/
+            background:
+                    linear-gradient(to left bottom,
+                    transparent 50%, rgba(0,0,0,.4) 0)
+                    no-repeat 100% 0 / 2em 2em,
+                    linear-gradient(-135deg, transparent 1.414em, #58a 0);
+            /*
+             如果要保留对角线的 2em 长度,就要将 background-size 乘以 根号2 。 
+             如果要保留水平和垂直方向上的 2em 长度,就要用切角渐变的角标位置值除以 根号2 。
+            */
+            /*
+            由于 background-size 需要把这个长度重复两次,而且绝大多数的
+                CSS 度量都不是在对角线上进行的,因此第二种方案更加合适。色标的位置
+                  值将变成 2除以 根号 2
+                =           根号2 ≈ 1.414 213 562 ,我们可以将其取整为 1.5em:
+            */
+            padding: 2em;/* 请确保该元素已经留出了不 小于折角尺寸的内边距,否则文 本将有可能重叠在折页部分之*/
+        }
+        .breakanglev2:before{
+            background:
+                    linear-gradient(to left bottom,
+                    transparent 50%, rgba(0,0,0,.4) 0)
+                    no-repeat 100% 0 / 2em 2em;
+        }
+
+        .breakanglev3{
+            background: #58a;/*回退样式*/
+            background:
+                    linear-gradient(to left bottom,
+                    transparent 50%, rgba(0,0,0,.4) 0)
+                    no-repeat 100% 0 / 3em 1.732em, /**参考勾股定理p139*/
+                    linear-gradient(-150deg, transparent 1.5em, #58a 0);
+            /*
+             如果要保留对角线的 2em 长度,就要将 background-size 乘以 根号2 。 
+             如果要保留水平和垂直方向上的 2em 长度,就要用切角渐变的角标位置值除以 根号2 。
+            */
+            /*
+            由于 background-size 需要把这个长度重复两次,而且绝大多数的
+                CSS 度量都不是在对角线上进行的,因此第二种方案更加合适。色标的位置
+                  值将变成 2除以 根号 2
+                =           根号2 ≈ 1.414 213 562 ,我们可以将其取整为 1.5em:
+            */
+            padding: 2em;/* 请确保该元素已经留出了不 小于折角尺寸的内边距,否则文 本将有可能重叠在折页部分之*/
+        }
+
+        .breakanglev4{
+            background: #58a;/*回退样式*/
+            /*背景不能旋转 将折角移到伪元素中*/
+            background:
+                    linear-gradient(-150deg, transparent 1.5em, #58a 0);
+            padding: 2em;/* 请确保该元素已经留出了不 小于折角尺寸的内边距,否则文 本将有可能重叠在折页部分之*/
+            position: relative;
+            border-radius: 4px;
+        }
+
+        .breakanglev4::before{
+            content: "";
+            position: absolute;
+            top:0;
+            right: 0;
+            background:
+                    linear-gradient(to left bottom,
+                    transparent 50%, rgba(0,0,0,.2) 0, rgba(0,0,0,.4))/*透明渐变效果*/
+                    no-repeat 100% 0; /**参考勾股定理p139*/
+            width:1.732em; /*position absolute需要显式指定*/
+            height: 3em;
+            /* 确 保 把 translateY() 变 形放在旋转变形之前,否则这个 三角形会在 30°方向上进行移动。 因为每个变形步骤都会改变元素 的整个坐标系统,而不仅是改变 元素自身!*/
+            transform:translateY(-1.3em) rotate(-30deg); /*translate长度计算参考p140*/
+            transform-origin:bottom right;
+            border-bottom-left-radius: inherit;
+            box-shadow: -.2em .2em .3em -.1em rgba(0,0,0,.15);
+        }
+        div{
+            margin:20px;
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="note">
+         缺陷: 当折角元素之下的背景不是纯色,而是一幅图案、一层纹理、一张 照片、一幅渐变或其他任何一种背景图像时。
+         当我们想要一个 45°以外的(旋转的)折角时
+    </div>
+
+    <div class="note rounded">
+        用border-color border-width实现折角 有局限
+    </div>
+
+    <div class="breakangle">
+        45°折角的解决方案 用 linear-gradient实现
+        美观、灵活、简约的折角效果。
+
+        请确保该元素已经留出了不 小于折角尺寸的内边距,否则文 本将有可能重叠在折页部分之上
+
+    </div>
+    <div class="breakangle breakanglev2">
+        45°折角的解决方案
+        增加一个 暗色的三角形来实现翻折效果。实现方法是增加另一层渐变来生成这个三 角形并将其定位在右上角,这样就可以通过 background-size 来控制折角 的大小。
+    </div>
+
+
+    <div class="breakanglev3">
+        150°折角的解决方案
+        增加一个 暗色的三角形来实现翻折效果。实现方法是增加另一层渐变来生成这个三 角形并将其定位在右上角,这样就可以通过 background-size 来控制折角 的大小。
+    </div>
+    <div class="breakanglev4">
+        现实中折角带旋转功能
+        <br/>
+        把折页三角形的 width 和 height 对调,以此改变它的方向,这样 就可以得到跟折页缺口对称的三角形,而不是一个可以补足折页缺口的三角 形。
+        <br/>
+        <img src="../../img/breakangle-compute-angle.png" width="600"/>
+        150°折角的解决方案
+        增加一个 暗色的三角形来实现翻折效果。实现方法是增加另一层渐变来生成这个三 角形并将其定位在右上角,这样就可以通过 background-size 来控制折角 的大小。
+        <br/>
+        <ul>
+            <li>
+                 如果要改变元素的宽高或其他尺寸(比如内边距等),只需要修改 一处。
+            </li>
+            <li>
+                如果要改变元素的背景色,则只需要修改两处(如果不写回退样式 则只有一处)。
+            </li>
+            <li>
+                如果要修改折页的大小,需要修改四处,并做一些复杂的计算。
+            </li>
+            <li>
+                 如果要修改折页的角度,则需要修改五处,并做一些更加复杂的
+                计算。
+            </li>
+        </ul>
+    </div>
+
+    <div class="breakangle-mixin">
+        使用预处理期简化
+
+
+        @mixin folded-corner($background, $size, $angle: 30deg) {
+        position: relative;
+        background: $background; /* 回退样式 */ background:
+        linear-gradient($angle - 180deg, transparent $size, $background 0);
+        border-radius: .5em;
+        $x: $size / sin($angle);
+        $y: $size / cos($angle);
+        &::before { content: '';
+        position: absolute;
+        top: 0; right: 0;
+        background: linear-gradient(to left bottom,
+        transparent 50%, rgba(0,0,0,.2) 0,
+        rgba(0,0,0,.4)) 100% 0 no-repeat; width: $y; height: $x;
+        transform: translateY($y - $x)
+        rotate(2*$angle - 90deg); transform-origin: bottom right;
+        border-bottom-left-radius: inherit;
+        box-shadow: -.2em .2em .3em -.1em rgba(0,0,0,.2); }
+        }
+        /* 当调用时... */ .note {
+        @include folded-corner(#58a, 2em, 40deg); }
+    </div>
+</body>
+</html>
