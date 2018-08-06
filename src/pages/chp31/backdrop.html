@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>backdrop   </title>
+    <style>
+        dialog::backdrop{
+            background: rgba(0,0,0,0.6);
+        }
+    </style>
+</head>
+<body>
+    <input type="button" value="click me" onclick="document.querySelector('#modal').showModal();">
+    <dialog id="modal">
+        Hello Fish
+        <input type="button" value="close" onclick="this.parentNode.close();">
+    </dialog>
+</body>
+</html>

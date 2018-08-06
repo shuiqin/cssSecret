@@ -20,6 +20,11 @@
         button.cancel {
             background-color: darkslategray;
         }
+        button.cancel:hover{
+            cursor: not-allowed; /*按钮被禁用cursor*/
+            cursor: url("transparent.gif");/*回退方案到css2.1*/
+            cursor: none;
+        }
         button.ok {
             background-color: yellow;
         }

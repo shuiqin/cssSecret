@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图片对比器</title>
+    <style>
+        .image-slider {
+            position:relative;
+            display: inline-block;
+        }
+        .image-slider > div {
+            position: absolute;
+            top: 0; bottom: 0; left: 0;
+            width: 50%; /* 初始宽度 */
+            /*宽度可以动态的根据用户的交互发生改变*/
+            resize: horizontal;
+            max-width:100%;/*1) 解决可以把 的宽度拉伸到超过图片宽度的程度的问题**/
+            overflow: hidden; /* 让它可以裁切图片 */
+        }
+
+        /**2) 解决 调节手柄不容易辨认 的问题*/
+        .image-slider > div::before {
+            content: '';
+            position: absolute;
+            bottom: 0; right: 0;
+            width: 12px;
+            height: 12px;
+            background: white;
+            cursor: ew-resize;/*自释性*/
+
+            padding: 5px;
+            background:
+                linear-gradient(-45deg, white 50%, transparent 0); background-clip: content-box;
+        }
+
+        .image-slider img {
+            display: block;
+            user-select: none; /**两张图片应用 user-select: none,这样即使用户在没有点中调节手柄的情况下拖动鼠标,也不会误选图 片。*/
+        }
+
+        /*js imageslider start*/
+        /*围输入控件当前的浏览器支持 度比 resize 属性要好一些。*/
+        .Jimage-slider {
+            position:relative;
+            display: inline-block;
+        }
+        .Jimage-slider > div {
+            position: absolute;
+            top: 0; bottom: 0; left: 0;
+            width: 50%; /* 初始宽度 */
+            /*宽度可以动态的根据用户的交互发生改变*/
+             /*1) 解决可以把 的宽度拉伸到超过图片宽度的程度的问题**/
+            overflow: hidden; /* 让它可以裁切图片 */
+        }
+        .Jimage-slider img {
+            display: block;
+            user-select: none; /**两张图片应用 user-select: none,这样即使用户在没有点中调节手柄的情况下拖动鼠标,也不会误选图 片。*/
+        }
+
+        .Jimage-slider input {
+            position: absolute; left: 0;
+            bottom: 10px;
+            width: 100%;
+            margin: 0;
+
+            /**增加用户的可操作区域 提升使用体验*/
+            width:50%;
+            transform: scale(2);
+            transform-origin: left bottom;
+
+            /*个范围输入控件在视觉上与整个控件更加统 一,可以用混合模式和 / 或滤镜来实现。
+            multiply、screen 和 luminosity 这几种混合模式似乎都可以得到不错的效果。
+            此外,filter: contrast(4) 会让这个滑块变得黑白分明,而低于 1 的对比度值会让它显示出更多的灰色 调。*/
+            filter: contrast(.5);
+            mix-blend-mode: luminosity;
+        }
+        /*js imageslider end*/
+
+    </style>
+</head>
+<body>
+    <div class="image-slider">
+        <div>
+            <img alt="before" src= "../../img/adamcatlace-before.jpg">
+        </div>
+        <img src="../../img/adamcatlace.jpg" alt="after">
+    </div>
+<div>        可以把 的宽度拉伸到超过图片宽度的程度。  调节手柄不容易辨认。
+</div>
+<div>
+    上面方式存在的缺点:
+    <ul>
+        <li>
+            它对键盘来说是不可访问的。
+        </li>
+        <li>调整上层图片的唯一方法就是拖动。对于较大的图片,或有运动障 碍的用户来说,这就比较讨厌了。
+            如果允许用户点击某一个点就可 以把图片宽度调整到那个点所在的位置,它的体验就会大幅提高。
+        </li>
+        <li>
+            用户只能在上层图片的右下角进行调整大小的操作。即使我们已经 对它的样式进行了强化,但它仍然可能被用户忽略
+        </li>
+    </ul>
+</div>
+
+    <div class="Jimage-slider">
+        <img alt="before" src= "../../img/adamcatlace-before.jpg">
+        <img src="../../img/adamcatlace.jpg" alt="after">
+    </div>
+<!--
+js转换后的代码
+
+ <div class="image-slider"> <div>
+<img src="adamcatlace-before.jpg" alt="Before" /> </div>
+<img src="adamcatlace-after.jpg" alt="After" />
+<input type="range" /> </div>
+
+-->
+</body>
+<script>
+    function $$(selector, context) {
+        context = context || document;
+        var elements = context.querySelectorAll(selector);
+        return Array.prototype.slice.call(elements);
+    }
+
+    $$('.Jimage-slider').forEach(function(slider) {  // 创建附加的div元素,并用它包住第一个图片元素
+        var div = document.createElement('div');
+        var img = slider.querySelector('img');
+        slider.insertBefore( div,img); /*insertBefore p200此处存在错误*/
+        div.appendChild(img);
+// 创建滑块
+        var range = document.createElement('input');
+        range.type = 'range';
+        range.oninput = function() {
+            div.style.width = this.value + '%'; };
+        range.addEventListener('input', function () {
+            div.style.width = this.value + '%';
+        });
+        slider.appendChild(range);
+    });
+</script>
+</html>

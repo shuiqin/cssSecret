@@ -6,25 +6,171 @@
     <style type="text/css">
         div{
             margin: 3em;
+            padding:1.2em;
+            width: 50vw;
+            vertical-align: middle;
+            text-align: center;
+            font-size:40px;
         }
         .relief-print{
             color: hsl(210, 13%, 30%);
             background: hsl(210, 13%, 60%);
-            height: 30vh;
-            line-height: 30vh;
-            width: 50vw;
-            vertical-align: middle;
-            text-align: center;
         }
         .relief-print-css{
-            text-shadow: 0 1px 1px hsla(0,0%,100%,.8);
+            /*字体变化大的时候 使用em 自适应*/
+            text-shadow: 0 0.1em 0.1em hsla(0,0%,100%,.8);/*浅字深底 投影走文字下面*/
         }
+
+        .relief-print-v1{
+            background: hsl(210, 13%, 30%);
+            color: hsl(210, 13%, 60%);
+        }
+        .relief-print-css-v1{
+            text-shadow: 0 -0.1em 0.1em hsla(0,0%,0%,1);/*深字浅底 投影走文字上面*/
+        }
+
+        .outline-letter{
+            background:deeppink;
+            color:white;
+            text-shadow: 1px 1px black, -1px -1px black,
+                    1px -1px black, -1px 1px black;
+        }
+
+        .outline-letterv1{
+            background:deeppink;
+            color:white;
+            text-shadow: 0 0 1px black,
+            0 0 1px black,
+            0 0 1px black,
+            0 0 1px black,
+            0 0 1px black,
+            0 0 1px black;
+        }
+
+        /**svg空心字开始*/
+        h1 {
+            font: 500%/1 Rockwell, serif;
+            background: deeppink;
+            color: white;
+        }
+        h1 text {
+            fill: currentColor;
+        }
+        h1 svg { overflow: visible }
+        h1 use {
+            stroke: black;
+            stroke-width: 6;
+            stroke-linejoin: round;
+        }
+        /**svg空心字结束*/
+
+        /**文字发光**/
+        .shine-text{
+            background: #203;
+            color: #ffc;
+            text-shadow: 0 0 .1em, 0 0 .3em;
+        }
+        /**悬停外发光 动画*/
+        .shine-text-a
+        {
+            background: #203;
+            color: white;
+            transition: 1s;
+
+        }
+        .shine-text-a:hover{
+            color: transparent;
+            text-shadow: 0 0 .1em white, 0 0 .3em white;
+            /*text-shadow: 0 0 .1em, 0 0 .3em;*/
+        }
+        /*使用滤镜效果实现文字发光**/
+        .filter-text-shine{
+            background: #203;
+            color: white;
+            /**动画显示不正常*/
+            /*transition: 0.5s;*/
+        }
+        .filter-text-shine:hover{
+            filter:blur(0.1em);
+        }
+        /*使用滤镜效果实现文字发光结束**/
+        /*文字凸起效果开始伪3D*/
+        .raised-text{
+            background: #203;
+            color: white;
+            text-shadow: 0 1px hsl(0, 0%, 85%),
+            0 2px hsl(0, 0%, 80%),
+            0 3px hsl(0, 0%, 75%),
+            0 4px hsl(0, 0%, 70%),
+            0 5px hsl(0, 0%, 65%),
+            0 5px 10px black;/*看起来还不够真实。,那就是在底部加一层投影: 更真实*/
+        }
+        /*文字凸起效果结束伪3D*/
+        /**复古文字效果开始*/
+        .ancient-text{
+            color: white;
+            background: hsl(0,50%,45%);
+            text-shadow: 1px 1px black, 2px 2px black,
+            3px 3px black, 4px 4px black,
+            5px 5px black, 6px 6px black,
+            7px 7px black, 8px 8px black;
+        }
+        /**复古文字效果结束*/
+
+
     </style>
 </head>
 <body>
     <div class="relief-print">凸版印刷效果</div>
 
-    <div class="relief-print relief-print-css">凸版印刷效果</div>
+    <div class="relief-print relief-print-css">
+        对浅色底、深色字使用凸版印刷</div>
 
+
+    <div class="relief-print-v1 relief-print-css">
+        对深色底、浅色文字字使用白色shadow</div>
+    <div class="relief-print-v1 ">
+        深色底、浅色文字</div>
+    <div class="relief-print-v1 relief-print-css-v1">
+        对深色底、浅色文字字使用黑色shadow印刷</div>
+
+    <div class="outline-letter">空心字效果 w设置多个shadow 为这些shadow设置不同方向善良的便宜量</div>
+    <div class="outline-letterv1">缺点: 性能消耗较高。没 错,这是因为用了模糊算法。
+         重叠多层轻微模糊的投影来模拟描边。这种方法不需 要设置偏移量:</div>
+
+    <div>
+        我们需要的描边越粗,上面两种方案产生的结果就越差
+        不过别忘了,我们始终拥有 SVG 这个终极方案,不过它需要在结构代 码中插入很多乱糟糟的东西
+        <h1><svg width="2em" height="1.2em"> <use xlink:href="#css" />
+            <text id="css" y="1em">CSS</text>
+        </svg></h1>
+    </div>
+
+    <div class="shine-text">
+        文字外发光
+    </div>
+
+    <div class="">
+        <a class="shine-text-a">
+            文字外发光 :为鼠标悬停添加 加个过渡效果
+            在 :hover 状态下把文字本身隐藏掉, 那它看起来真的就像在慢慢变模糊
+        </a>
+    </div>
+
+    <div class="filter-text-shine">
+        不过你要牢记一点,依赖 text-shadow 来实现文字显示的做法无法实 现平稳退化:
+        如果浏览器不支持 text-shadow,那就什么字也看不见了。
+        因 此,需要确保只在那些支持 text-shadow 属性的环境中使用上述效果。
+        你 也可以换种思路,使用 CSS 滤镜来实现文字的模糊效果:
+        支持这种方法的浏览器可能要少一些,但至少在不支持的情况下不会有 任何功能损失。
+    </div>
+
+    <div class="raised-text">
+       CSS3D 长串累加的投影, 不设模糊并以 1px 的跨度逐渐错开,使颜色逐渐变暗,然后在底部加一层强 烈模糊的暗投影,从而模拟完整的立体效果
+    </div>
+
+    <div class="ancient-text">
+        所有的投影都设成黑色,并且去掉最 底层的投影,就可以模拟出一种在复古标志牌中常见的文字效果
+    </div>
 </body>
 </html>

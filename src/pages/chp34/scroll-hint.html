@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>滚动条提示 阴影</title>
+    <style type="text/css">
+        /* chrome 不支持 safari支持*/
+        ul{
+            overflow:auto;
+            width: 10em;
+            height: 8em;
+            padding: .3em .5em;
+            border: 1px solid silver;
+            /*rgba(255,255,255,0) hsla(0,0%,100%,0) */
+            background:   linear-gradient(white 30%,red),radial-gradient(at 50% 0, rgba(0,0,0,.2), transparent 80%) no-repeat;
+            /**当我们滚动到最顶 部的时候,这个“遮罩层”再也无法完整地遮住阴影了*/
+            background-size:100% 50px, 100% 15px;
+            background-repeat: no-repeat;
+            /**生成阴影的那 层背景将具有默认的 background-attachment 值(scroll),因为我们希望 它总是保持在原位。
+            我们把遮罩背景的 background-attachment 属性设置 为 local,
+            这样它就会在我们滚动到最顶部时盖住阴影,在向下滚动时跟着 滚动,从而露出阴影。
+            */
+            background-attachment: local, scroll;
+        }
+    </style>
+</head>
+<body>
+<ul>
+     <li>Ada Catlace</li>
+    <li>Alan Purring</li>
+    <li>Schrödingcat</li>
+    <li>Tim Purrners-Lee</li>
+    <li>WebKitty</li>
+    <li>Json</li>
+    <li>Void</li>
+    <li>Neko</li>
+    <li>NaN</li>
+    <li>Cat5</li>
+    <li>Vector</li>
+</ul>
+</body>
+</html>

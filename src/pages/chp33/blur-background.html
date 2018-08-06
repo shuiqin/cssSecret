@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>通过模糊弱化背景</title>
+    <style type="text/css">
+        main{
+            transition:  0.6s filter; /**动画不行*/
+        }
+        main.de-emphasized {
+        /*filter: blur(5px);*/
+            filter: blur(3px) contrast(.8) brightness(.8);
+        }
+    </style>
+</head>
+<body>
+<div>
+    <main>hello, baby~~ </main>
+    <input type="button" value="click me" onclick="openDlg()">
+    <dialog id="modal" onclick="this.close();">
+        O HAI , I'm a dialog. click on me to dismiss.
+        <input type="button" value="close" onclick="this.parentNode.close();">
+    </dialog>
+</div>
+<script type="text/javascript">
+    function openDlg() {
+        document.querySelector('#modal').showModal();
+        document.querySelector('main').className = 'de-emphasized';
+    }
+</script>
+</body>
+</html>

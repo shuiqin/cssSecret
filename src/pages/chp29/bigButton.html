@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>扩大按钮可点区域 fitts法则</title>
+    <style type="text/css">
+        button{
+            background: #58a;
+            color:white;
+            border-radius: 50%;
+            padding: .3em .5em;
+            font: bold 150%/1 sans-serif;
+            cursor: pointer;
+            position:relative;
+        }
+        /*影响布局**/
+        .bigButton{
+            border: 10px solid transparent;
+            background-clip:padding-box ;
+            box-shadow: 0 0 0 1px  rgba(0,0,0,.3) inset,
+            0 .1em .2em -.05em rgba(0,0,0,.5);
+        }
+
+        .button-container .button::before{
+            content: '';/*important*/
+            position: absolute;
+            left: -10px;
+            top: -10px;
+            right: -10px;
+            bottom: -10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <button class="bigButton">+</button>
+<div>
+    1) 内嵌投影和 (常规的)外部投影组合起来,将会得到一个怪异的效果,
+    因为外部投影是绘 制在 border box 外部的。比如,我们可能想给这个按钮再加一道真实的模糊化
+    投影,来营造一种“浮出表面”的效果(这也是一种暗示可点击的自释性)
+    <br/>
+    2) 边框会影响布局,而且在某些 场景下我们可能根本无法利用边框
+    <br/>
+    3)解决方案 伪元素同样可以代表其宿主元素来响应鼠标交互。
+</div>
+
+<div class="button-container">
+    <button class="button">+</button>
+</div>
+    <div>
+        要有任何一个伪元素可供利用,这个方法就可以发挥作用,
+        也不会干 扰其他任何效果。这个基于伪元素的解决方案极为灵活,
+        我们基本上可以把 热区设置为任何想要的尺寸、位置或形状,甚至可以脱离元素原有的位置!
+    </div>
+</body>
+</html>
