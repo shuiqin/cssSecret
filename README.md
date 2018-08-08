@@ -144,14 +144,15 @@ function testValue(id, value, property) {
      
  ### 自适应布局原则
  遵从“尽量减少代码重复”所描述的原则对此也是有帮助的,因为你不 需要去覆盖媒体查询里同样数量的声明。这在本质上减轻了它们所产生的维 护成本。
- 下面还有一些建议,可能会帮你避免不必要的媒体查询。
-  * 使用百分比长度来取代固定长度。如果实在做不到这一点,也应该 尝试使用与视口相关的单位(vw、vh、vmin 和 vmax),它们的值解 析为视口宽度或高度的百分比。
-  * 当你需要在较大分辨率下得到固定宽度时,使用 max-width 而不是 width,因为它可以适应较小的分辨率,而无需使用媒体查询。
-  * 不要忘记为替换元素(比如 img、object、video、iframe 等)设 置一个 max-width,值为 100%。
-  * 假如背景图片需要完整地铺满一个容器,不管容器的尺寸如何变化, background-size: cover 这个属性都可以做到。但是,我们也要时 刻牢记——带宽并不是无限的,因此在移动网页中通过 CSS 把一张 大图缩小显示往往是不太明智的。
-  * 当图片(或其他元素)以行列式进行布局时,让视口的宽度来决定 列的数量。弹性盒布局(即 Flexbox)或者 display: inline-block 加上常规的文本折行行为,都可以实现这一点。
-  * 在使用多列文本时,指定column-width(列宽)而不是指定 column-count(列数),这样它就可以在较小的屏幕上自动显示为单 列布局。
- 
+ 下面还有一些 
+* 使用百分比长度来取代固定长度。如果实在做不到这一点,也应该 尝试使用与视口相关的单位(vw、vh、vmin 和 vmax),它们的值解 析为视口宽度或高度的百分比。
+* 当你需要在较大分辨率下得到固定宽度时,使用 max-width 而不是 width,因为它可以适应较小的分辨率,而无需使用媒体查询。
+* 不要忘记为替换元素(比如 img、object、video、iframe 等)设 置一个 max-width,值为 100%。
+* 假如背景图片需要完整地铺满一个容器,不管容器的尺寸如何变化, background-size: cover 这个属性都可以做到。但是,我们也要时 刻牢记——带宽并不是无限的,因此在移动网页中通过 CSS 把一张 大图缩小显示往往是不太明智的。
+* 当图片(或其他元素)以行列式进行布局时,让视口的宽度来决定 列的数量。弹性盒布局(即 Flexbox)或者 display: inline-block 加上常规的文本折行行为,都可以实现这一点。
+* 在使用多列文本时,指定column-width(列宽)而不是指定 column-count(列数),这样它就可以在较小的屏幕上自动显示为单 列布局。建议,可能会帮你避免不必要的媒体查询。
+
+
  ### 抽象泄漏法则
     css预处理器自己有不为人知的bug
     
@@ -171,11 +172,9 @@ function testValue(id, value, property) {
    border: 10px dotted hsla(0,0%,100%,.5); 
    background: green;
    ```
-   **
-   在 CSS 2.1 中,这就是背景的工作原理。我们只能接受它并且向前看。 谢天谢地,从背景与边框(第三版)(http://w3.org/TR/css3-background)开 始,
+   **在 CSS 2.1 中,这就是背景的工作原理。我们只能接受它并且向前看。 谢天谢地,从背景与边框(第三版)(http://w3.org/TR/css3-background)开 始,
    我们可以通过 background-clip 属性来调整上述默认行为所带来的不 便。这个属性的初始值是 border-box,意味着背景会被元素的 border box
-   (边框的外沿框)裁切掉。如果不希望背景侵入边框所在的范围,我们要做 的就是把它的值设为 padding-box,这样浏览器就会用内边距的外沿来把背 景裁切掉。
-   **
+   (边框的外沿框)裁切掉。如果不希望背景侵入边框所在的范围,我们要做 的就是把它的值设为 padding-box,这样浏览器就会用内边距的外沿来把背 景裁切掉。**
    ```
    border: 10px dotted hsla(0,0%,100%,.5); 
    background: green;
@@ -256,8 +255,8 @@ function testValue(id, value, property) {
    http://w3.org/TR/css3- background/#corner-overlap
    
    ### 半椭圆 ### 
-    *** 这个形状是垂直对称的,这意味着左上角和右上角的半径值应该是 相同的;与此类似,左下角和右下角的半径值也应该是相同的。
-    *** 顶部边缘并没有平直的部分(也就是说,整个顶边都是曲线),这意 味着左上角和右上角的半径之和应该等于整个形状的宽度。
+* 这个形状是垂直对称的,这意味着左上角和右上角的半径值应该是 相同的;与此类似,左下角和右下角的半径值也应该是相同的。
+* 顶部边缘并没有平直的部分(也就是说,整个顶边都是曲线),这意 味着左上角和右上角的半径之和应该等于整个形状的宽度。
    
    半椭圆是可以变成半圆的,只要它的宽度刚好伸展到高度的两倍(或者对一个沿纵轴劈开的 椭圆来说,是高度伸展为宽度的两倍)。
    ```
@@ -353,7 +352,7 @@ function testValue(id, value, property) {
    
    ### chp17 染色效果 ###
    
-   ** 滤镜是可动画的,而混合模式则不是 **
+   **滤镜是可动画的,而混合模式则不是**
    
 1)为一幅灰度图片(或是被转换为灰度模式的彩色图片)增加染色效果 (color tint),是一种流行且优雅的方式,
 可以给一系列风格迥异的照片带来 视觉上的一致性。我们通常会在静止状态下应用这个效果,当发生 :hover
@@ -440,7 +439,7 @@ unicode-range: U+26; /*指定特定字符使用该字体*/
  凸版印刷效果: 浅色背景上使用深色文字时(比如眼前的这个例子),在底部 加上浅色投影通常效果最佳。
  
  TODO 伪3D文字 用css预处理器处理
- @mixin text-3d($color: white, $depth: 5) { SCSS $shadows: ();
+``` @mixin text-3d($color: white, $depth: 5) { SCSS $shadows: ();
  $shadow-color: $color;
  @for $i from 1 through $depth { $shadow-color: darken($shadow-color, 10%); $shadows: append($shadows,
  0 ($i * 1px) $shadow-color, comma);
@@ -448,11 +447,11 @@ unicode-range: U+26; /*指定特定字符使用该字体*/
  color: $color;
  text-shadow: append($shadows,
  0 ($depth * 1px) 10px black, comma); h1 { @include text-3d(#eee, 4); }
- 
+ ```
  
  TODO 复古文字效果
  
- @function text-retro($color: black, $depth: 8) { $shadows: (1px 1px $color,);
+ ```@function text-retro($color: black, $depth: 8) { $shadows: (1px 1px $color,);
  @for $i from 2 through $depth { $shadows: append($shadows,
  ($i*1px) ($i*1px) $color, comma);
 }
@@ -460,7 +459,7 @@ unicode-range: U+26; /*指定特定字符使用该字体*/
 h1 {
 color: white;
 background: hsl(0,50%,45%);
-text-shadow: text-retro(); }
+text-shadow: text-retro(); }```
 
 
 #### 环形文字 chp28 p171 ###
@@ -511,27 +510,27 @@ box-shadow: 0 0 0 999px rgba(0,0,0,.8);
    
    “景深效果”:当我们的视线聚焦在 距离较近的物体上时,远处的背景就是虚化的。
    
-   ###chp34滚动提示 TODO ###
-   chrome不支持 safari支持
-   http://dabblet.com/gist/20205b5fcdd834461e80
-   http://lea.verou.me/2012/04/background-attachment-local/
-   
-   使用伪元素实现相同的效果
-   http://kizu.ru/en/fun/shadowscroll/
-   
-   ###chp35
-   交互式图片对比控件 纯css和js###
-   
-   
-   ###chp36自适应内部元素###
-   个 figure 元素能跟它所包含 的图片一样宽(图片的尺寸往往不是固定的),而且是水平居中的
-   们希望它的宽度由内部因素来决定,而不是由外部因素来决定。
-   
-   方案: 
-      *** 让 <figure> 元素浮动会让它得到正确的宽度,但同时也彻底改变了 它的布局模式,这往往会导致我们不想要的结果(参见图 7-2)。
-    *** 对figure应用display: inline-block会让它根据内容来决定自身的 尺寸,但跟我们想要的方式还是不一样(参见图 7-3)。此外,即使它的 宽度计算方式与我们的期望一致,我们也很难继续完成水平居中的任务。 我们需要对它的父元素应用text-align: center,然后对这个父元素的 所有子元素(p, ul, ol, dl, ...)都设置一遍text-align: left。
-    *** 当开发者走投无路时,就只能对 figure 应用一个固定的 width 或 max-width了,然后对figure > img应用max-width: 100%。可 是这个方法无法充分利用有效空间;对于过小的图片来说,布局效 果也很突兀。此外,响应式也无从谈起。
-   
-   
+###chp34滚动提示 TODO ###
+chrome不支持 safari支持
+http://dabblet.com/gist/20205b5fcdd834461e80
+http://lea.verou.me/2012/04/background-attachment-local/
+
+使用伪元素实现相同的效果
+http://kizu.ru/en/fun/shadowscroll/
+
+###chp35
+交互式图片对比控件 纯css和js###
+
+
+###chp36自适应内部元素###
+个 figure 元素能跟它所包含 的图片一样宽(图片的尺寸往往不是固定的),而且是水平居中的
+们希望它的宽度由内部因素来决定,而不是由外部因素来决定。
+
+方案: 
+* 让 <figure> 元素浮动会让它得到正确的宽度,但同时也彻底改变了 它的布局模式,这往往会导致我们不想要的结果(参见图 7-2)。
+* 对figure应用display: inline-block会让它根据内容来决定自身的 尺寸,但跟我们想要的方式还是不一样(参见图 7-3)。此外,即使它的 宽度计算方式与我们的期望一致,我们也很难继续完成水平居中的任务。 我们需要对它的父元素应用text-align: center,然后对这个父元素的 所有子元素(p, ul, ol, dl, ...)都设置一遍text-align: left。
+* 当开发者走投无路时,就只能对 figure 应用一个固定的 width 或 max-width了,然后对figure > img应用max-width: 100%。可 是这个方法无法充分利用有效空间;对于过小的图片来说,布局效 果也很突兀。此外,响应式也无从谈起。
+
+
 
             
