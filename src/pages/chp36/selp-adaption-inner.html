@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>自适应内部元素</title>
+    <style type="text/css">
+        figure{
+            border: 1px solid lightslategray;
+            padding: 1em;
+           /* display: inline-block;*/
+            float: left;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>Some text ... See 'git help config' and search for 'push.default' for further information. </p>
+        <figure>
+            <img src="../../img/adamcatlace.jpg">
+            <figcaption>
+                The great Sir Adam Catlace was named after
+                Countess Ada Lovelace, the first programmer.
+                希望这个 figure 元素能跟它所包含 的图片一样宽(图片的尺寸往往不是固定的),而且是水平居中的
+                <p>文本行比图片要宽多了。如何 让figure的宽度由它内部的图片来决定,而不是由它的父元素来决定呢11</p>
+            </figcaption>
+        </figure>
+        <p>Some text ... remote: Resolving deltas: 100% (5/5), completed with 5 local objects. </p>
+    </div>
+</body>
+</html>
