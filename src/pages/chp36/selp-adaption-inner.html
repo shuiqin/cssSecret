@@ -7,9 +7,14 @@
         figure{
             border: 1px solid lightslategray;
             padding: 1em;
-           /* display: inline-block;*/
+           /* display: inline-block;
             float: left;
+            width: min-content;*/
+            max-width: 300px;/*旧版浏览器提供平稳的回退样式*/
+            max-width: min-content; /**/
+            margin: auto;/*水平居中*/
         }
+        figure > img { max-width: inherit; }
     </style>
 </head>
 <body>
@@ -26,5 +31,20 @@
         </figure>
         <p>Some text ... remote: Resolving deltas: 100% (5/5), completed with 5 local objects. </p>
     </div>
+
+
+    <article style="height:100px; min-height: min-content;">
+        <aside style="height: 50%;">
+            <div style="height: 150px;"></div>
+        </aside>
+        <section style="height: 30px;"></section>
+    </article>
+
+    <article style="height:100px; min-height: min-content;">
+        <aside style="height: 200%;">
+            <div style="height: 150px;"></div>
+        </aside>
+        <section style="height: 30px;"></section>
+    </article>
 </body>
 </html>

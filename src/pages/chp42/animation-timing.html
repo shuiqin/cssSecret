@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>动画调速函数</title>
+    <style>
+        @keyframes bounce {
+            60%, 80%, to {
+                transform: translateY(400px);
+                animation-timing-function:  cubic-bezier(.215,.61,.355,1);
+            }
+            70% { transform: translateY(300px); }
+            90% { transform: translateY(360px); }
+        }
+
+        .ball {
+            display:inline-block;
+
+            width: 0; height: 0; padding: 1.5em;
+            border-radius: 50%;
+            margin: auto;
+            background: red radial-gradient(at 30% 30%, #fdd, red);
+            /*调速函数分别是 cubic-bezier(.215,.61,.355,1) 和 cubic- bezier (.755,.05,.855,.06)(后者并不是前者的反向版本,它的曲线 更加陡峭,效果也更加逼真)。*/
+            animation: bounce 2s cubic-bezier(.755,.05,.855,.06) forwards;
+        }
+
+        @keyframes bounce1 {
+            60%, 80%, to {
+                transform: translateY(400px);
+                animation-timing-function: ease;
+            }
+            70% { transform: translateY(300px); }
+            90% { transform: translateY(360px); }
+        }
+        .ball1 {
+            display:inline-block;
+            width: 0; height: 0;
+            padding: 1.5em;
+            border-radius: 50%;
+            margin: auto 30vw;
+            background: red radial-gradient(at 30% 30%, #fdd, blue);
+            animation: bounce 2s cubic-bezier(.1,.25,1,.25) forwards;
+        }
+
+        .flex-box{
+            display: flex;
+        }
+        /*.flex-box div{
+            flex: 1;
+        }*/
+        body {
+            background: linear-gradient(skyblue, white 450px, yellowgreen 0);
+            min-height: 100vh;
+        }
+    </style>
+</head>
+<body>
+<div class="flex-box">
+    <div class="ball"></div>
+    <div class="ball1"></div>
+
+</div>
+
+</body>
+</html>

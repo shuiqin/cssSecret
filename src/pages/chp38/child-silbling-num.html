@@ -1,0 +1,56 @@
+<html>
+<head>
+    <style type="text/css">
+
+        li {
+            float: left;
+            margin: 0;
+            outline: 1px solid black
+        }
+
+        li:nth-child(1):nth-last-child(1) {
+            width: 100%;
+        }
+
+        li:nth-child(1):nth-last-child(2),
+        li:nth-child(2):nth-last-child(1) {
+            width: 50%;
+        }
+
+        li:nth-child(1):nth-last-child(3),
+        li:nth-child(2):nth-last-child(2),
+        li:nth-child(3):nth-last-child(1) {
+            width: 33.33%;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        li {
+            background-color: red;
+            color: white;
+            list-style: none;
+        }
+    </style>
+</head>
+
+<body>
+    <ul>
+        <li>One</li>
+    </ul>
+
+
+    <ul>
+        <li>One</li>
+        <li>Two</li>
+    </ul>
+
+
+    <ul>
+        <li>One</li>
+        <li>Two</li>
+        <li>Three</li>
+    </ul>
+</body>
+</html>

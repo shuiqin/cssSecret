@@ -221,40 +221,43 @@ function testValue(id, value, property) {
    网格: 线性渐变 linear-gradient
    波点: 径向渐变  radial-gradient (允许我们创建圆形 椭圆 径向渐变能创建的最简单的图案是圆点的阵列)
    ```
-   @mixin polka($size, $dot, $base, $accent) { SCSS background: $base;
+   @mixin polka($size, $dot, $base, $accent) {
+    background: $base;
    background-image:
    radial-gradient($accent $dot, transparent 0),
-   radial-gradient($accent $dot, transparent 0); background-size: $size $size; background-position: 0 0, $size/2 $size/2;
+   radial-gradient($accent $dot, transparent 0); 
+   background-size: $size $size; 
+   background-position: 0 0, $size/2 $size/2;
    }
    @include polka(30px, 30%, #655, tan);
    SCSS
    ```
-   ### 角向渐变 p70 ### 
+### 角向渐变 p70 ### 
+
+### svg代码可以以data URI的方式内嵌到样式表 chp6/conicgradient###
+```
+     .chess-svg{
+           width:100vw;
+           height:30vh;
+           margin:10px;
+           background: #eee url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill-opacity="0.25">\
+           <rect x="50" width="50" height="50"></rect>\
+           <rect y="50" width="50" height="50"></rect>\
+           </svg>');
+           background-size:30px 30px;
+       }
+```
    
-   ### svg代码可以以data URI的方式内嵌到样式表 chp6/conicgradient###
-   ```
-         .chess-svg{
-               width:100vw;
-               height:30vh;
-               margin:10px;
-               background: #eee url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" fill-opacity="0.25">\
-               <rect x="50" width="50" height="50"></rect>\
-               <rect y="50" width="50" height="50"></rect>\
-               </svg>');
-               background-size:30px 30px;
-           }
-   ```
-   
-   ### 蝉原则 多个时长为质数的动画 创造出看起不是按照明显的规律循环的动画 chp6/cicada-animation.html
-   
-   ### 蚂蚁行军图, 脚注  chp8/border-image.html### 
-   
-   ### 自适应椭圆 ###
-   border-radius 超过50%都是一半的效果
-   当任意两个相邻圆角的半径之和超过border box的尺寸时 , 用户代理必须按比例减小个边框半径所使用的值 直到她们不会相互重叠
-   http://w3.org/TR/css3- background/#corner-overlap
-   
-   ### 半椭圆 ### 
+### 蝉原则 多个时长为质数的动画 创造出看起不是按照明显的规律循环的动画 chp6/cicada-animation.html
+
+### 蚂蚁行军图, 脚注  chp8/border-image.html### 
+
+### 自适应椭圆 ###
+border-radius 超过50%都是一半的效果
+当任意两个相邻圆角的半径之和超过border box的尺寸时 , 用户代理必须按比例减小个边框半径所使用的值 直到她们不会相互重叠
+http://w3.org/TR/css3- background/#corner-overlap
+
+### 半椭圆 ### 
 * 这个形状是垂直对称的,这意味着左上角和右上角的半径值应该是 相同的;与此类似,左下角和右下角的半径值也应该是相同的。
 * 顶部边缘并没有平直的部分(也就是说,整个顶边都是曲线),这意 味着左上角和右上角的半径之和应该等于整个形状的宽度。
    
@@ -263,28 +266,27 @@ function testValue(id, value, property) {
        width: 200px;
        height: 100px;
        border-radius: 50% / 100% 100% 0 0;
-   }
    ```
     基于前两条观察,我们可以推断出,左半径和右半径在水平方向上的值应该均为 50%。
     再看看垂直方向,似乎顶部的两个圆角占据了整个元素的高度,而且底部完全没有任何圆角。因此,在垂直方向上 border-radius 的 合理值似乎就是 100% 100% 0 0。
     因为底部两个角的垂直圆角是零,那么它们的水平圆角是多少就完全不重要了,因为此时水平圆角总是会被计算为零。(你能想像一个 垂直半径为零而水平半径为正值的圆角吗?没错,连写规范的作者 们都做不到。)
    
-   ### 按钮集 ### 
-   http://simurai.com/archive/buttons/#
-   
-   ###平行四边形 chp10 skew p88###
-   
-   如果你想把这个效果应用到 一个默认显示为行内(transform)的元素,不
-   要忘记把它的 display 属性设置 为 其 他 值, 比 如 inline-block 或 block,否则变形(transform)是不会生效的。这一点对它内层的元素也是 适用的。
-   
-   ###内圆角使用伪元素实现 chp10##
-   http://nicolasgallagher.com/multiple-backgrounds-and-borders-with-css2/
-   
-  http://nicolasgallagher.com/css-background-image-hacks/
-  
-  ###菱形图片 chp11 clip-path###
-  
-  ####切角效果  p95 chp12 ###
+### 按钮集 ### 
+http://simurai.com/archive/buttons/#
+
+### 平行四边形 chp10 skew p88###
+
+如果你想把这个效果应用到 一个默认显示为行内(transform)的元素,不
+要忘记把它的 display 属性设置 为 其 他 值, 比 如 inline-block 或 block,否则变形(transform)是不会生效的。这一点对它内层的元素也是 适用的。
+
+### 内圆角使用伪元素实现 chp10##
+http://nicolasgallagher.com/multiple-backgrounds-and-borders-with-css2/
+
+http://nicolasgallagher.com/css-background-image-hacks/
+
+### 菱形图片 chp11 clip-path###
+
+### 切角效果  p95 chp12 ###
   
 暂且不提代码不够 DRY 以及浏览器支持程度上的不足,它还有一个更 大的缺点,就是当内边距不够宽时,
 它会裁切掉文本,因为它只能对元素做 统一的裁切,并不能区分元素的各个部分。与此不同的是,渐变方案允许文 
@@ -528,11 +530,231 @@ http://kizu.ru/en/fun/shadowscroll/
 个 figure 元素能跟它所包含 的图片一样宽(图片的尺寸往往不是固定的),而且是水平居中的
 们希望它的宽度由内部因素来决定,而不是由外部因素来决定。
 
+其他的值还有max-content,它的行为类似于我们在前面看到的display: inline- block;
+而 fit-content 的行为与浮动元素是相同的(和 min-content 的效果通常一致, 但也有例外)
+
+
 方案: 
 * 让 <figure> 元素浮动会让它得到正确的宽度,但同时也彻底改变了 它的布局模式,这往往会导致我们不想要的结果(参见图 7-2)。
-* 对figure应用display: inline-block会让它根据内容来决定自身的 尺寸,但跟我们想要的方式还是不一样(参见图 7-3)。此外,即使它的 宽度计算方式与我们的期望一致,我们也很难继续完成水平居中的任务。 我们需要对它的父元素应用text-align: center,然后对这个父元素的 所有子元素(p, ul, ol, dl, ...)都设置一遍text-align: left。
+* 对figure应用display: inline-block会让它根据内容来决定自身的 尺寸,但跟我们想要的方式还是不一样(参见图 7-3)。此外,即使它的 
+宽度计算方式与我们的期望一致,我们也很难继续完成水平居中的任务。 我们需要对它的父元素应用text-align: center,然后对这个父元素的
+ 所有子元素(p, ul, ol, dl, ...)都设置一遍text-align: left。
 * 当开发者走投无路时,就只能对 figure 应用一个固定的 width 或 max-width了,然后对figure > img应用max-width: 100%。可 是这个方法无法充分利用有效空间;对于过小的图片来说,布局效 果也很突兀。此外,响应式也无从谈起。
 
 
+### 精确控制表格列宽
+http://dabblet.com/gist/7979af102a991cecfcdf
+https://css-tricks.com/fixing-tables-long-strings/
 
-            
+* table-layout。 它的默认值是 auto,其行为模式被称作自动表格布局算法
+fixed只把较少的控制权留给渲染引擎, 我们设置的(宽 度)样式会直接起作用,而不仅仅被视为一种提示;同时,溢出行为(包括 text-overflow)与其他元素行为也是一样的
+```
+table {
+    table-layout: fixed;
+    width: 100%;
+}
+```
+
+### chp38 根据兄弟元素的数量来设置样式
+对 CSS 选择符来说,基于兄弟元素的总数来匹配元素并不简单。 设想一个列表,假设仅当列表项的总数为 4 时才对这些列表项设置样式。
+我 们可以用 li:nth-child(4) 来选中列表的第四个列表项,但这并不是我们 想要的;我们需要在列表项的总数为 4 时选中每一个列表项。
+
+
+本节用到的都是 :nth-child() 选择符,但我们讨论的所有内容也适用于 :nth-of-type() 选 择符,而且它在语义上往往更加贴切,
+因为在所有的兄弟元素中可能包含了不同的元素类 型,而我们往往只关心同类型的元素。本节的示例用到的是列表项,但我们讨论的技巧同样 适用于其他类型的元素。
+
+** 兄弟选择符(~)
+* li:nth-child(4) ~ li。不过,这个选择符只能 命中第四个列表项以及在它之后的所有列表项
+* 对于只有一个列表项的特殊场景来说,解决方案显然就是 :only- child, :only-child 等 效 于 :first-child:last-child
+```
+li:only-child {
+/* 只有一个列表项时的样式 */
+}
+
+li:first-child:nth-last-child(1) { 
+/* 相当于li:only-child */
+}
+```
+ 一个正好有四个列表项的列表中的第一个列表项 :   :first-child 和 :nth-last-child(4) 的元素。因此,这个元素需要是 父元素的第一个子元素,同时还需要是从后往前数的第四个子元素
+```
+li:first-child:nth-last-child(4), li:first-child:nth-last-child(4) ~ li {
+/* 当列表正好包含四项时,命中所有列表项 */ 
+}
+```
+
+```
+/* 定义mixin */
+ 
+ @mixin n-items($n) {
+    &:first-child:nth-last-child(#{$n}), &:first-child:nth-last-child(#{$n}) ~ & {
+    @content; 
+    }
+}
+/* 调用时是这样的:*/
+ li {
+    @include n-items(4) {
+    /* 属性与值写在这里 */
+    } 
+}
+```          
+  
+  *  根据兄弟元素的数量范围来匹配元素  
+       +b 这种形式的表达式可以选中从第 b 个 开始的所有子元素。
+       举例来说,:nth-child(n+4) 将会选中除了第一、二、 三个子元素之外的所有子元素
+       
+       
+      ** 利用这个技巧,我们可以在列表项的总数是 4 或更多时选中所有列表 项在这种情况下,我们可以把表达式 n+4 传给 :nth-last- child():
+        
+```     
+        li:first-child:nth-last-child(n+4), li:first-child:nth-last-child(n+4) ~ li {
+             /* 当列表至少包含四项时,命中所有列表项 */ 
+         }
+```
+      ** 同理,-n+b 这种形式的表达式可以选中开头的 b 个元素。因此,仅当 列表中有 4 个或更少的列表项时:
+
+```
+       li:first-child:nth-last-child(-n+4), li:first-child:nth-last-child(-n+4) ~ li {
+        /* 当列表最多包含四项时,命中所有列表项 */
+       }
+``` 
+
+    ** 我们还可以把这两种技巧组合起来使用,不过代码也会变得更加 复杂。假设我们希望在列表包含 2 ~ 6 个列表项时命中所有的列表项,可以 这样写:
+```
+li:first-child:nth-last-child(n+2):nth-last-child(-n+6), li:first-child:nth-last-child(n+2):nth-last-child(-n+6) ~ li {
+/* 当列表包含2~6项时,命中所有列表项 */ 
+}
+```
+
+### chp39 满幅的背景 定宽的内容
+
+背景宽度满幅,内容宽度固定 
+https://www.airbnbchina.cn/careers
+https://www.cn.kayak.com/?ispredir=true
+http://www.conosur.ie/
+
+* 采用这种设计的页脚通常需要把结构代码写成:
+```
+ <footer>
+<div class="wrapper">
+<!-- 页脚的内容写在这里 --> </div>
+</footer>
+```
+同时用 CSS 来设置这两层元素的样式:
+```
+footer {
+background: #333;
+} 
+.wrapper {
+max-width: 900px;
+margin: 1em auto; 
+}
+
+
+.wrapper {
+max-width: 900px;
+margin: 1em calc(50% - 450px);
+}
+/**之所以要在页脚内加一层容器元素,唯一的原因就是为了给它的 margin 指定神奇的 auto 关键字,
+从而实现内容的水平居中布局。不过,现 在我们已经用 calc() 替代了这个神奇的 auto,而且这个新值实际上可以作
+ 为一个通用的 CSS 长度值应用到任何一个接受长度值的属性上。
+这意味着 如果我们愿意,还可以把这个长度值应用到父元素的 padding 上,而整个效 果是保持不变的:*/
+
+footer {
+   /* max-width: 900px;冗余 不需要*/
+    padding: 1em; /*向后兼容性*/
+    padding: 1em calc(50% - 450px);
+    /*若屏幕宽度小于内容宽度 产生的效果是无内边距 可通过媒体查询优化*/
+    background: #333;
+}
+.wrapper {}
+
+
+http://dabblet.com/gist/763229b68fa27c5c1bfa
+
+```
+
+### chp40 垂直居中 ### 
+* 一个行内元素, 就对它的父元素应用text-align: center;如果它是一个块级元素,就对 它自身应用margin: auto。
+https://css-tricks.com/centering-in-the-unknown/
+1) translate() 变形函数中使用百分比值时,是以这个元素自身的宽度和高度 为基准进行换算和移动的
+// 利用这个 CSS 变形技巧,我们可以让宽高不固定的元素垂直居中
+
+```
+main {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+```
+
+
+```
+/**flexbox居中*/
+.flex-div{
+    display: flex;
+    background: yellowgreen;
+}
+.flex-div main{
+    /*居中元素分配到的宽度等于 max- content*/
+    /**如果浏览器不支持 Flexbox, == 回退方案
+    页面渲染结果水平居中(如果设置了宽度的话)。虽然没有垂直居中效果,但也是完全可以接受的。*/
+    margin: auto;/**水平垂直方向都居中*/
+}
+/**flexbox居中*/
+
+/**flexbox将匿名容器居中**/
+.flexbox-anonymous{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 10em;
+}
+```
+
+
+### chp41紧贴底部的页脚
+
+cssstickyfooter.com
+ryanfait.com/sticky-footer 
+css-tricks.com/snippets/css/sticky-footer 
+pixelsvsbytes.com/blog/2011/09/sticky-css-footers-the-flexible-way 
+mystrd.at/modern-clean-css-sticky-footer 
+最后两个解决方案是这众多链接中最为精简的,但仍然有其局限之处。
+
+
+TODO 怎么计算的???? 
+假设这个页脚的文本永远不可能折行,那我们就可以推算出它实际所占 的高度:
+2 行 × 行高 +3× 段落的垂直外边距 + 页脚的垂直内边距 = 2×1.5em+3×1em+1em=7em
+
+* 使用flex实现紧贴底部的页脚
+这个flex属性实际上是 flex-grow、flex-shrink 和 flex-basis 的简写语法。任何 元素只要设置了一个大于 0 的 flex 值,
+就将获得可伸缩的特 性;flex 的值负责控制多个可伸 缩元素之间的尺寸分配比例。举 例来说,在我们眼前的这个例子 中,如果<main>是flex:2
+而 <footer>是flex: 1,那么内容 区块的高度将是页脚高度的两倍。 如果把它们的值从2和1改为4
+ 此时,页面看起来与没有启用 Flexbox 的情况似乎是一样的,因为所有 元素都占据了整个视口的宽度,而它们的高度也都是由其自身的内容来决定 的。
+ ```
+body {
+display: flex;
+flex-flow: column;
+min-height: 100vh;
+ }
+main { flex: 1; }
+```
+
+### chp42 动画 缓动效果
+CSS 提供了一个 cubic-bezier() 函数,允许我们指定自定义的调速函数。它接受四个参数,分别代表两个控 制锚点的坐标值,我们通过这两个控制锚点来指定想要的贝塞尔曲线。
+语 法形式是这样的:cubic-bezier(x1, y1, x2, y2),其中 (x1, y1) 表示第一 个控制锚点的坐标,而(x2, y2)是第二个
+ cubic-bezier()
+ * 把控制锚点的水平坐标和垂直坐标互换,就 可以得到任何调速函数的反向版本
+ 
+ ease 等 同 于 cubic-bezier(.25,.1,.25,1), 
+ 因 此 它 的 反 向 版 本 就 是 cubic- bezier(.1,.25,1,.25)
+ 
+ 
+ 三次贝塞尔曲线有一个饱受诟病的 缺点:在没有可视化界面的情况 下,它极难编辑和理解;用于描述 CSS 动画的调速函数时更是如此。 
+ 不过幸运的是,有一些在线工具是 专门为此而生的,比如由笔者倾情 打造的 
+ * cubic-bezier.com
+            ```animation-timing-function:  cubic-bezier(.215,.61,.355,1);
+            animation: bounce 2s cubic-bezier(.755,.05,.855,.06) forwards;```
+
+ 
