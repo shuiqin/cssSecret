@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>平滑过渡的动画</title>
+    <style type="text/css">
+        div{
+            margin: 2em;
+        }
+        .panoramic{
+            width: 384px;
+            height: 384px;
+            overflow: hidden;
+        }
+
+        @keyframes panoramic-bg {
+            to {background-position: 100% 0;}
+        }
+        .panoramic-bg{
+            width: 150px;
+            height: 150px;
+            background: url("../../img/diamond.png");
+            background-size: auto 100%;
+            background-position: 50% 0;
+        }
+        /*
+会从图片 的最左侧区域开始,向右慢慢滚动,并逐渐显示出图片的右侧区域。不过, 当我们把鼠标移出图片时,它就会生硬地跳回最左侧(参见图 8-31)。我们 终于碰到本节开头所描述的那个问题了!
+        */
+        .panoramic-bg-v1:hover, .panoramic-bg-v1:focus{
+            animation: panoramic-bg 10s linear  infinite alternate-reverse; /*alternate normal reverse alternate-reverse*/
+        }
+
+
+        /*平滑过渡的动画*/
+        .panoramic-bg-v2{
+            animation: panoramic-bg 10s linear  infinite alternate-reverse; /*alternate normal reverse alternate-reverse*/
+            animation-play-state: paused;
+        }
+
+        .panoramic-bg-v2:hover, .panoramic-bg-v2:focus{
+            animation-play-state: running;
+        }
+        /*平滑过渡的动画*/
+
+    </style>
+</head>
+<body>
+    <div class="panoramic">
+        <img src="../../img/diamond.png">
+    </div>
+    <div class="panoramic-bg panoramic-bg-v1">
+
+    </div>
+
+    <div class="panoramic-bg panoramic-bg-v2">
+
+    </div>
+</body>
+</html>

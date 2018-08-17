@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>弹性过渡</title>
+    <style>
+        /**通用样式设置*/
+        body {
+            padding: 1.5em;
+            font: 200%/1.6 Baskerville;
+        }
+
+        input {
+            display: block;
+            padding: 0 .4em;
+            font: inherit;
+        }
+        .callout {
+            position: absolute;
+            max-width: 14em;
+            padding: .6em .8em;
+            border-radius: .3em;
+            margin: .3em 0 0 -.2em;
+            background: #fed;
+            border: 1px solid rgba(0,0,0,.3);
+            box-shadow: .05em .2em .6em rgba(0,0,0,.2);
+            font-size: 75%;
+        }
+
+        .callout:before {
+            content: "";
+            position: absolute;
+            top: -.4em;
+            left: 1em;
+            padding: .35em;
+            background: inherit;
+            border: inherit;
+            border-right: 0;
+            border-bottom: 0;
+            transform: rotate(45deg);
+        }
+
+
+        /** version 1*/
+        input:not(:focus) + .callout1 {
+            transform: scale(0);
+        }
+        .callout1 {
+            transition: .5s transform;
+            transform-origin: 1.4em -.4em;
+        }
+
+        /** version 2*/
+        /**先扩大到1.1倍在返原 使用animation scale*/
+        @keyframes elastic-grow {
+            from {
+                transform: scale(0);
+            }
+            70% {
+                transform: scale(1.1);
+                animation-timing-function: cubic-bezier(.1, .25, 1, .25);
+            }
+        }
+        input:not(:focus) + .callout-div:not(:hover) {
+            transform: scale(0);
+            transition: .5s transform; /*important**/
+
+        }
+
+        input:focus + .callout-div:not(:hover) { animation: elastic-grow .5s; }
+
+        .callout-div { transform-origin: 1.4em -.4em; }
+        /**version 2结束*/
+
+        /***version 3 1.1倍基于cubic-bezier y轴大于1的原理*/
+        input:not(:focus) + .callout3 {
+            transform: scale(0);
+            transition-timing-function: ease;/*important p234**/
+            transition: .25s ease transform; /*只对transform设置弹性过渡 不对颜色设置过渡 过渡会出现绿色中间色 */
+            color: gray;
+        }
+        .callout3 {
+            color: red;
+            transition: .5s cubic-bezier(.25,.1,.3,1.5) transform;/**对颜色弹性过渡不合适 设定弹性过渡作用的属性*/
+            transform-origin: 1.4em -.4em;
+        }
+    </style>
+</head>
+<body>
+<label>
+    Your username: <input  value="user"/>
+    <span class="callout1 callout">Only letters, numbers, underscores (_) and hyphens (-) allowed!</span>
+</label>
+
+<label>
+    Your username: <input  value="user"/>
+    <span class="callout-div callout">Only letters, numbers, underscores (_) and hyphens (-) allowed!</span>
+</label>
+
+<label>
+    Your username: <input value="user"/>
+    <span class="callout3 callout">Only letters, numbers, underscores (_) and hyphens (-) allowed!</span>
+</label>
+</body>
+</html>

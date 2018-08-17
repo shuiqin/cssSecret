@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>延环形路径平移的动画</title>
+    <style type="text/css">
+        .path{
+            background: yellow;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            position:relative;
+
+        }
+        .path img{
+            width: 20%;
+            border-radius: 50%;
+            position:absolute;
+            left: calc(50% - 30px);
+            top: 1em; /*issues 第一波旋转到外面去的问题*/
+           /* transform: translateX(-50%);*/ /*这个动画会影响后面动画效果*/
+        }
+
+        @keyframes spin {
+            to { transform: rotate(1turn); }
+        }
+        .avatar {
+            animation: spin 3s infinite linear;
+            transform-origin: 50% 150px; /* 150px = 路径的半径 */
+        }
+
+
+        /**嵌套的两层变形会相互抵 消”如出一辙:用内层的变形来抵消外层的变形效果。不过,这一次可不是 静态的抵消了,这次的抵消作用是*/
+        @keyframes spin {
+            to { transform: rotate(1turn); }
+        }
+        @keyframes spin-reverse {
+            from { transform: rotate(1turn); }
+        }
+        /*以上相当于使用animation-direction中的reverse属性 spin-reverse动作可废弃**/
+        .ver3 .avatar {
+            animation: spin 3s infinite linear;
+            transform-origin: 50% 150px; /* 150px = 路径的半径 */
+        }
+        .ver3 .avatar > img {
+            /*animation: spin-reverse 3s infinite linear;*/
+            /*继承父元素动画 并重置keyframe*/
+            animation: inherit;
+           /* animation-name: spin-reverse;*/
+            animation-direction: reverse;
+        }
+
+
+
+        @keyframes spin11 {
+            from {
+                transform: rotate(0turn)
+                translateY(-150px) translateY(50%)
+                rotate(1turn)
+            }
+            to {
+                transform: rotate(1turn)
+                translateY(-150px) translateY(50%)
+                rotate(0turn);
+            }
+        }
+
+        .ver1  .avatar {
+            width: 50px;
+            margin:0 auto;
+            border-radius: 50%;
+            overflow: hidden;
+        }
+
+        .ver1-1 .avatar {
+            animation: spin11 3s infinite linear;
+            margin:calc(50% - 25px) auto 0;
+
+
+        }
+
+        .ver1  .path {
+            width: 300px; height: 300px;
+            border-radius: 50%;
+            background: #fb3;
+            padding: 20px;/**why TODO>>>??*/
+        }
+
+    </style>
+</head>
+<body>
+<div class="ver1">
+    <div class="path">
+        <img src="../../img/adamcatlace.jpg" class="avatar" />
+    </div>
+</div>
+
+<div class="ver1 ver1-1">
+    <div class="path">
+        <img src="../../img/adamcatlace.jpg" class="avatar" />
+    </div>
+</div>
+
+<!---嵌套的两层变形会相互抵 消”如出一辙:用内层的变形来抵消外层的变形效果。不过,这一次可不是 静态的抵消了,这次的抵消作用是贯穿于整个动画的每一帧的-->
+<div class="ver2">
+    <div class="path">
+        <div class="avatar">
+            <img src="../../img/adamcatlace.jpg" class="" />
+        </div>
+    </div>
+</div>
+
+<div class="ver3">
+    <div class="path">
+        <div class="avatar">
+            <img src="../../img/adamcatlace.jpg" class="" />
+        </div>
+    </div>
+</div>
+
+
+</body>
+</html>

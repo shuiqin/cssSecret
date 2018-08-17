@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>闪烁效果</title>
+    <style type="text/css">
+        p{
+            text-decoration: blink;
+        }
+
+        /*文字闪烁效果*/
+        @keyframes blink-smooth {
+            /*修改关 键帧,让状态切换发生在每个循环周期的中间。解决生硬跳回原来颜色的问题*/
+            50% { color: transparent }
+        }
+        /*段文字可以平滑地从它原来的颜色淡化为透明色, 但随后会生硬地跳回原来的颜色*/
+        .highlight { animation: 1s blink-smooth 6 alternate; }
+
+        .highlight1 { animation: 1s  blink-smooth 3 steps(1, start); }
+
+    </style>
+</head>
+<body>
+<blink>blink标签</blink>
+<p>text-decoration: blink</p>
+<div class="highlight">文字闪烁效果css 平滑闪</div>
+<div class="highlight1">文字闪烁效果css steps硬闪</div>
+
+</body>
+</html>

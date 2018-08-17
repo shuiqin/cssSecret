@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>打字动画</title>
+    <style>
+        /*逐字显示*/
+        @keyframes typing { from { width: 0 }
+        }
+
+        /*给文字加闪烁的光标*/
+        @keyframes caret {
+            50% { border-color: currentColor; }
+        }
+
+
+        h1 {
+            font: bold 200% Consolas, Monaco, monospace;/*等宽字体*/
+            width: 7em; /* 文本的宽度 ch单位不支持的浏览器的回退样式 */
+            width: 15ch; /*等宽字体中,“0”字形的宽度和其他所有字形的宽度是一样的**/ /*ch单位支持情况*/
+            animation: typing 8s steps(15), caret 1s steps(1) infinite;;
+            /*IMPORTANT 设置border颜色transparent 将真实颜色设到关键帧 不支持动画的时候光标消失 向后兼容*/
+            border-right: .05em solid transparent;/*caret光标闪烁效果*/ /**不支持动画 表标还在*/
+            overflow: hidden;
+            white-space: nowrap;/**阻止文本折行,防止文本的行数会随着宽度的扩张不断变化*/
+
+        }
+    </style>
+</head>
+<body>
+    <!--应用到最顶级 的标题(<h1>)上,并且已经它把设置为等宽字体了-->
+    <h1>Css is awesome! Hello</h1>
+   <!---
+   issues:
+   最明显的问题是整个动画是平滑连贯的,而不是逐字显现的。
+ 另一个不那么明显的问题是,目前我们已经用 em 单位指定了宽度,
+   虽然它比像素单位要好一些,但仍然不够理想。这个宽度为什么是 7.7
+
+   1) 用 steps() 来修复第一个问题,就像“逐帧动画”和“闪烁效 果”中所做的那样。
+      但不幸的是,我们所需要的步进数量是由字符的数量来 决定的,这显然是很难维护的,
+      而且对于动态文字来说更是不可能维护的。 不过,我们稍后将看到,可以用一小段 JavaScript 代码来把这件事情自动化。
+   2) 第二个问题可以通过 ch 单位来缓解。这个 ch 单位是由 CSS 值与单位
+    (第三版)(http://w3.org/TR/css3-values)规范引入的一个新单位,表示“0” 字形的宽度。它应该是最不为人知的一个新单位,
+    因为在绝大多数场景下,我们并不关心 0 这个字符显示出来到底有多宽。但对等宽字体来说,这是个 例外。
+    在等宽字体中,“0”字形的宽度和其他所有字形的宽度是一样的。因 此,如果我们用 ch 单位来表达这个标题的宽度,
+    那取值实际上就是字符的 数量:在这个例子中就是 15
+   -->
+</body>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="application/javascript">
+    function $$(selector, context) {
+        context = context || document;
+        var elements = context.querySelectorAll(selector);
+        return Array.prototype.slice.call(elements);
+    }
+    $$('h1').forEach(function(h1) {
+        var len = h1.textContent.length, s = h1.style;
+        s.width = len + 'ch';
+        s.animationTimingFunction = "steps("+len+"),steps(1)";
+    });
+</script>
+</html>

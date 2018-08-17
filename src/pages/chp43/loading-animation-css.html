@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>逐帧动画</title>
+    <style>
+        .loader{
+            width: 100px;
+            height: 100px;
+            background: url(../../img/loader.png) 0 0;
+            /* 把文本隐藏起来 */
+            text-indent: 200%;
+            white-space: nowrap;
+            overflow: hidden;
+
+            animation: loader 1s infinite linear;/*贝塞尔曲线的调速函数*/
+            /*逐帧动画 实现逐帧动画的首次尝试失败了,
+            因为我们并不需要帧与帧之间的 过渡状态
+*/
+            animation: loader 1s infinite steps(8, end);
+            /*其值可以是 start 或 end (默认值)。这个参数用于指定动画在每个循环周期的什么位置发生帧的切换 动作(关于默认值 end 的行为*/
+
+        }
+
+        @keyframes loader {
+            to { background-position: -800px 0; }
+        }
+
+        .sprite-steps{
+            background: url(../../img/sprite-steps.png) 0 0;
+            width: 50px;
+            height: 72px;
+            animation: sprite-steps 1s steps(10) infinite ;
+        }
+
+        @keyframes sprite-steps {
+            to {background-position: -500px 0}
+        }
+
+    </style>
+</head>
+<body>
+    <div class="loader">Loading...</div>
+
+    <div class="sprite-steps">Loading...</div>
+
+    <div>
+        这里的秘诀是 采用 steps() 这个调速函数,而不是基于贝塞尔曲线的调速函数
+        你可能会问:“采用什么调速函数?!”就像我们在前一节所看到的, 所有基于贝塞尔曲线的调速函数都会在关键帧之间进行插值运算,
+        从而产生 平滑的过渡效果。这个特性很棒,因为在通常情况下,平滑的过渡确实是我 们使用 CSS 过渡和动画的原因。
+        但在眼前的场景下,这种平滑特性恰恰毁 掉了我们想实现的逐帧动画效果
+    </div>
+</body>
+</html>
