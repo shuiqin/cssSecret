@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .parent{
+            background-color: yellow;
+            height:60vh;
+            margin: 1em;
+        }
+        .medium-v1{
+            display:flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .child{
+            background-color: greenyellow;
+            height: 30%;
+        }
+        .medium-v2{
+            display:table-cell;
+            vertical-align: middle;
+            text-align: center;
+            width:100vw;
+        }
+        .medium-v2  .child{
+            display:inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="parent medium-v1">
+        <div class="child">
+            <p>垂直居中对齐</p>
+            <p>flex</p>
+        </div>
+    </div>
+
+    <div class="parent medium-v2">
+        <div class="child">
+            <p>垂直居中对齐</p>
+            <p>table-cell</p>
+        </div>
+    </div>
+
+    <div class="parent medium-v3">
+        <div class="child">
+            <p>heelo</p>
+            <p>test</p>
+        </div>
+    </div>
+</body>
+</html>
