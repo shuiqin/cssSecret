@@ -1,0 +1,49 @@
+.container{
+    padding-left: 220px; /*为左右两栏腾出空间*/
+    padding-right: 220px;
+}
+
+.left{
+    float: left;
+    width: 200px;
+    height: 400px;
+    background-color: #0a66b7;
+    margin-left: -100%;
+    position:relative;
+    left:-220px;/*position: relative相当于它自己做偏移*/
+}
+
+.center{
+    float:left;
+    width:100%;
+    height:500px;
+    background-color: #00a2ae;
+}
+
+.right{
+    float: left;
+    width: 200px;
+    height: 400px;
+    background-color: bisque;
+    margin-left: -200px;
+    position:relative;
+    right: -220px;
+}
+
+/*issues:
+1)若其中一列高度拉长 其他两列不会自动填充
+2) center部分最小宽不能小于left部分 否则left会跳转到下一行
+*/
+
+/**以下伪等高布局 解决issues2-- start*/
+.left,
+.right,
+.center{
+    padding-bottom: 10000px;
+    margin-bottom: -10000px;
+}
+
+.container{
+    overflow: hidden; /*切掉溢出背景**/
+}
+/**以下伪等高布局 解决issues2 -- end*/

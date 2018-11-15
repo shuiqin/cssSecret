@@ -1,0 +1,48 @@
+.container{
+    min-width: 600px;// 确保中间内容可以显示出来 2*left + right;
+}
+
+.left{
+    float: left;
+    width: 200px;
+    height: 400px;
+    background-color: #0a66b7;
+    margin-left: -100%;
+    /* position:relative;
+     left:-220px;
+     */
+}
+
+.center{
+    float:left;
+    width:100%;
+    height:500px;
+    background-color: #00a2ae;
+}
+.center .inner{
+    margin: 0 200px; //新增
+}
+
+.right{
+    float: left;
+    width: 200px;
+    height: 400px;
+    background-color: bisque;
+    margin-left: -200px;
+    /*position:relative;
+    right: -220px;*/
+}
+
+
+/**以下伪等高布局 解决issues2-- start*/
+.left,
+.right,
+.center{
+    padding-bottom: 10000px;
+    margin-bottom: -10000px;
+}
+
+.container{
+    overflow: hidden; /*切掉溢出背景**/
+}
+/**以下伪等高布局 解决issues2 -- end*/
