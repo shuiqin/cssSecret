@@ -1,0 +1,9 @@
+.parent{
+    display: flex;
+}
+.right{
+    flex: 1;
+}
+.left{
+    padding:10px;
+}

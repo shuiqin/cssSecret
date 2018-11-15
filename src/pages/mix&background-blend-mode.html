@@ -26,7 +26,11 @@
             background-color: #fff;
         }
         .isolateContainer{
-            isolation: isolate;/*important*/
+            isolation: isolate;
+            /*important
+            混合模式默认会混合所有层叠顺序比其低的层叠元素, 如果不隔离属性,文字颜色
+            会混合白色背景色 显示颜色就会变
+            希望值混合模式只用到某个元素,不向下渗透 就可以用isolation*/
         }
         .container1 span{
             font-size:12em;

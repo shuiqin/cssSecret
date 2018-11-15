@@ -1,0 +1,14 @@
+/*issues: 两边栏高度不一样时情况处理*/
+.parent{
+    overflow: hidden;
+    *zoom: 1; /*ie6 haslayout*/
+}
+
+.left{
+    float: left;
+}
+
+.right{
+    overflow: hidden;
+    *zoom: 1; /*ie6 haslayout*/
+}
